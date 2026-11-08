@@ -37,12 +37,18 @@ export default function App() {
     authService.getUser().then(u => {
       setUser(u)
       setIsAuthChecking(false)
+      if (u) {
+        dataService.syncUserProgressFromCloud(u.id)
+      }
     })
 
     const unsubscribe = authService.onAuthStateChange(u => {
       setUser(u)
       setIsAuthChecking(false)
       setIsGuest(false)
+      if (u) {
+        dataService.syncUserProgressFromCloud(u.id)
+      }
     })
 
     return () => unsubscribe()

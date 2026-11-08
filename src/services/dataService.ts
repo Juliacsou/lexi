@@ -17,9 +17,69 @@ const LOCAL_ATTEMPTS_KEY = 'lexi_exercise_attempts_v1'
 class DataService {
   private localProgress: Record<string, BlockProgress> = {}
   private localAttempts: ExerciseAttempt[] = []
+  private blockCodeToId: Record<string, string> = {}
 
   constructor() {
     this.loadLocalData()
+    this.initBlockIdCache()
+  }
+
+  private async initBlockIdCache() {
+    if (!isSupabaseConfigured) return
+    try {
+      const { data } = await supabase.from('blocks').select('id, code')
+      if (data) {
+        for (const item of data) {
+          this.blockCodeToId[item.code] = item.id
+        }
+      }
+    } catch {
+      // offline / ignored
+    }
+  }
+
+  async getBlockUuid(code: string): Promise<string | null> {
+    if (this.blockCodeToId[code]) return this.blockCodeToId[code]
+    if (!isSupabaseConfigured) return null
+    try {
+      const { data } = await supabase.from('blocks').select('id').eq('code', code).single()
+      if (data?.id) {
+        this.blockCodeToId[code] = data.id
+        return data.id
+      }
+    } catch {
+      // Ignore
+    }
+    return null
+  }
+
+  async syncUserProgressFromCloud(userId: string) {
+    if (!isSupabaseConfigured) return
+    try {
+      const { data: rows } = await supabase
+        .from('user_block_progress')
+        .select('*, blocks(code)')
+        .eq('user_id', userId)
+
+      if (rows && rows.length > 0) {
+        for (const row of rows) {
+          const code = (row.blocks as { code?: string } | null)?.code
+          if (code) {
+            this.localProgress[code] = {
+              block_code: code,
+              status: row.status as BlockStatus,
+              best_score: row.best_score !== null ? Number(row.best_score) : null,
+              last_score: row.last_score !== null ? Number(row.last_score) : null,
+              attempts_count: row.attempts_count || 0,
+              passed_at: row.passed_at
+            }
+          }
+        }
+        this.saveProgress()
+      }
+    } catch (e) {
+      console.warn('Could not sync user progress from Supabase:', e)
+    }
   }
 
   private loadLocalData() {
@@ -151,15 +211,18 @@ class DataService {
 
     // Sync to Supabase if configured and logged in
     if (isSupabaseConfigured) {
-      supabase.auth.getUser().then(({ data }) => {
+      supabase.auth.getUser().then(async ({ data }) => {
         if (data?.user) {
-          supabase.from('user_exercise_attempts').insert({
-            user_id: data.user.id,
-            block_id: attempt.block_code, // Or block UUID
-            mode: attempt.mode,
-            user_answer: attempt.user_answer,
-            is_correct: attempt.is_correct
-          }).then()
+          const blockUuid = await this.getBlockUuid(attempt.block_code)
+          if (blockUuid) {
+            supabase.from('user_exercise_attempts').insert({
+              user_id: data.user.id,
+              block_id: blockUuid,
+              mode: attempt.mode,
+              user_answer: attempt.user_answer,
+              is_correct: attempt.is_correct
+            }).then()
+          }
         }
       })
     }
@@ -192,17 +255,20 @@ class DataService {
 
     // Sync to Supabase
     if (isSupabaseConfigured) {
-      supabase.auth.getUser().then(({ data }) => {
+      supabase.auth.getUser().then(async ({ data }) => {
         if (data?.user) {
-          supabase.from('user_block_progress').upsert({
-            user_id: data.user.id,
-            block_id: blockCode,
-            status: newStatus,
-            best_score: bestScore,
-            last_score: score,
-            attempts_count: updated.attempts_count,
-            passed_at: updated.passed_at
-          }, { onConflict: 'user_id,block_id' }).then()
+          const blockUuid = await this.getBlockUuid(blockCode)
+          if (blockUuid) {
+            supabase.from('user_block_progress').upsert({
+              user_id: data.user.id,
+              block_id: blockUuid,
+              status: newStatus,
+              best_score: bestScore,
+              last_score: score,
+              attempts_count: updated.attempts_count,
+              passed_at: updated.passed_at
+            }, { onConflict: 'user_id,block_id' }).then()
+          }
         }
       })
     }
