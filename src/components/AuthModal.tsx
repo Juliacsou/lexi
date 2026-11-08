@@ -102,7 +102,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
           <div className="space-y-5 pt-2 text-center">
             <div className="w-16 h-16 rounded-3xl clay-badge bg-gradient-to-tr from-[#6732D8] to-[#FF8F12] mx-auto flex items-center justify-center">
               <img
-                src="./assets/Logo_V2_Simplificada_Aprovada.png"
+                src="./assets/Logo_V2_Simplificada_Transparente.png"
                 alt="Lexi Mascot"
                 className="w-12 h-12 object-contain drop-shadow"
               />

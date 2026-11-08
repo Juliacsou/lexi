@@ -1,5 +1,5 @@
 import React from 'react'
-import { ChevronLeft, Flame, RefreshCw } from 'lucide-react'
+import { ChevronLeft, Flame, RefreshCw, Sun, Moon } from 'lucide-react'
 import type { User } from '@supabase/supabase-js'
 
 interface HeaderProps {
@@ -11,6 +11,8 @@ interface HeaderProps {
   onResetDemo?: () => void
   user?: User | null
   onOpenAuth?: () => void
+  theme?: 'light' | 'dark'
+  onToggleTheme?: () => void
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -21,7 +23,9 @@ export const Header: React.FC<HeaderProps> = ({
   streak = 3,
   onResetDemo,
   user,
-  onOpenAuth
+  onOpenAuth,
+  theme = 'light',
+  onToggleTheme
 }) => {
   const avatarUrl = user?.user_metadata?.avatar_url || user?.user_metadata?.picture
 
@@ -39,7 +43,7 @@ export const Header: React.FC<HeaderProps> = ({
         ) : (
           <div className="flex items-center gap-2">
             <img
-              src="./assets/Logo_V2_Simplificada_Aprovada.png"
+              src="./assets/Logo_V2_Simplificada_Transparente.png"
               alt="Lexi Fox"
               className="w-10 h-10 object-contain drop-shadow-md"
             />
@@ -79,6 +83,22 @@ export const Header: React.FC<HeaderProps> = ({
           <Flame size={15} className="fill-[#FF8F12]" />
           <span>{streak}d</span>
         </div>
+
+        {/* Theme Switcher Toggle (☀️ Claro / 🌙 Escuro) */}
+        {onToggleTheme && (
+          <button
+            onClick={onToggleTheme}
+            title={theme === 'light' ? 'Mudar para Modo Escuro' : 'Mudar para Modo Claro'}
+            className="p-2 rounded-xl clay-btn clay-btn-dark active:scale-95 transition-all text-slate-300 hover:text-white"
+            aria-label="Toggle theme"
+          >
+            {theme === 'light' ? (
+              <Moon size={15} className="text-[#6732D8]" />
+            ) : (
+              <Sun size={15} className="text-[#FFD333]" />
+            )}
+          </button>
+        )}
 
         {/* User / Google Profile Button */}
         {onOpenAuth && (

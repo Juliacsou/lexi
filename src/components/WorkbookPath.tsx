@@ -78,7 +78,7 @@ export const WorkbookPath: React.FC<WorkbookPathProps> = ({
       {/* Vertical Gamified Path */}
       <div className="relative flex flex-col items-center py-6">
         {/* Decorative central winding line */}
-        <div className="absolute top-8 bottom-8 w-2 bg-[#25154A] rounded-full -z-0 shadow-[inset_1px_1px_2px_rgba(0,0,0,0.6)]" />
+        <div className="absolute top-8 bottom-8 w-2 bg-[#25154A] path-winding-line rounded-full -z-0 shadow-[inset_1px_1px_2px_rgba(0,0,0,0.6)]" />
 
         <div className="space-y-7 z-10 w-full flex flex-col items-center">
           {blocks.map((block, index) => {

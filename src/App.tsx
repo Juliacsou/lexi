@@ -24,6 +24,30 @@ export default function App() {
   const [isGuest, setIsGuest] = useState<boolean>(false)
   const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false)
   const [isAuthChecking, setIsAuthChecking] = useState<boolean>(true)
+  const [theme, setTheme] = useState<'light' | 'dark'>(() => {
+    const saved = localStorage.getItem('lexi_theme')
+    return saved === 'dark' ? 'dark' : 'light' // Default to light mode
+  })
+
+  // Sync theme class to html and body
+  useEffect(() => {
+    localStorage.setItem('lexi_theme', theme)
+    if (theme === 'light') {
+      document.documentElement.classList.add('light')
+      document.body.classList.add('light')
+      document.documentElement.classList.remove('dark')
+      document.body.classList.remove('dark')
+    } else {
+      document.documentElement.classList.remove('light')
+      document.body.classList.remove('light')
+      document.documentElement.classList.add('dark')
+      document.body.classList.add('dark')
+    }
+  }, [theme])
+
+  const handleToggleTheme = () => {
+    setTheme(prev => (prev === 'light' ? 'dark' : 'light'))
+  }
 
   const workbooks = dataService.getWorkbooks()
 
@@ -119,10 +143,12 @@ export default function App() {
   // If initial auth check is ongoing, render subtle splash
   if (isAuthChecking) {
     return (
-      <div className="min-h-screen bg-[#100924] flex items-center justify-center">
+      <div className={`min-h-screen flex items-center justify-center transition-colors duration-200 ${
+        theme === 'light' ? 'bg-[#EDE8F7]' : 'bg-[#100924]'
+      }`}>
         <div className="text-center space-y-3">
           <img
-            src="./assets/Logo_V2_Simplificada_Aprovada.png"
+            src="./assets/Logo_V2_Simplificada_Transparente.png"
             alt="Lexi"
             className="w-20 h-20 mx-auto object-contain animate-pulse"
           />
@@ -135,9 +161,19 @@ export default function App() {
   // IF NOT LOGGED IN AND NOT GUEST: SHOW WELCOME / LOGIN SCREEN FIRST!
   if (!user && !isGuest) {
     return (
-      <div className="min-h-screen bg-[#100924] flex flex-col items-center">
-        <div className="w-full max-w-md min-h-screen bg-[#150D30] flex flex-col relative shadow-[0_0_60px_rgba(0,0,0,0.6)]">
-          <WelcomeScreen onContinueAsGuest={() => setIsGuest(true)} />
+      <div className={`min-h-screen flex flex-col items-center transition-colors duration-200 ${
+        theme === 'light' ? 'bg-[#EDE8F7]' : 'bg-[#100924]'
+      }`}>
+        <div className={`w-full max-w-md min-h-screen flex flex-col relative transition-colors duration-200 ${
+          theme === 'light' 
+            ? 'bg-[#FAF8FE] shadow-[0_0_40px_rgba(103,50,216,0.12)]' 
+            : 'bg-[#150D30] shadow-[0_0_60px_rgba(0,0,0,0.6)]'
+        }`}>
+          <WelcomeScreen 
+            onContinueAsGuest={() => setIsGuest(true)}
+            theme={theme}
+            onToggleTheme={handleToggleTheme}
+          />
         </div>
       </div>
     )
@@ -164,9 +200,15 @@ export default function App() {
       : undefined
 
   return (
-    <div className="min-h-screen bg-[#100924] flex flex-col items-center">
+    <div className={`min-h-screen flex flex-col items-center transition-colors duration-200 ${
+      theme === 'light' ? 'bg-[#EDE8F7]' : 'bg-[#100924]'
+    }`}>
       {/* Mobile-first centered container with max-width */}
-      <div className="w-full max-w-md min-h-screen bg-[#150D30] flex flex-col relative shadow-[0_0_60px_rgba(0,0,0,0.6)]">
+      <div className={`w-full max-w-md min-h-screen flex flex-col relative transition-colors duration-200 ${
+        theme === 'light' 
+          ? 'bg-[#FAF8FE] shadow-[0_0_40px_rgba(103,50,216,0.12)]' 
+          : 'bg-[#150D30] shadow-[0_0_60px_rgba(0,0,0,0.6)]'
+      }`}>
         {/* Navigation Header */}
         <Header
           title={headerTitle}
@@ -177,6 +219,8 @@ export default function App() {
           onResetDemo={handleResetDemo}
           user={user}
           onOpenAuth={() => setIsAuthModalOpen(true)}
+          theme={theme}
+          onToggleTheme={handleToggleTheme}
         />
 
         {/* Content Body */}

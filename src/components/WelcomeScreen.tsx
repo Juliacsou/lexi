@@ -1,12 +1,18 @@
 import React, { useState } from 'react'
-import { Sparkles, Headphones, Award, ArrowRight, Loader2 } from 'lucide-react'
+import { Sparkles, Headphones, Award, ArrowRight, Loader2, Sun, Moon } from 'lucide-react'
 import { authService } from '../services/authService'
 
 interface WelcomeScreenProps {
   onContinueAsGuest: () => void
+  theme?: 'light' | 'dark'
+  onToggleTheme?: () => void
 }
 
-export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onContinueAsGuest }) => {
+export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ 
+  onContinueAsGuest,
+  theme = 'light',
+  onToggleTheme
+}) => {
   const [isLoading, setIsLoading] = useState(false)
 
   const handleGoogleLogin = async () => {
@@ -21,13 +27,34 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onContinueAsGuest 
   }
 
   return (
-    <div className="min-h-screen flex flex-col justify-between p-6 bg-gradient-to-b from-[#1C0E42] via-[#160E33] to-[#100924] text-white">
-      {/* Top Brand Tag */}
-      <div className="pt-4 text-center">
+    <div className={`min-h-screen flex flex-col justify-between p-6 transition-colors duration-200 ${
+      theme === 'light'
+        ? 'bg-gradient-to-b from-[#F5F0FF] via-[#FAF7FE] to-[#EDE7F9] text-[#1E103E]'
+        : 'bg-gradient-to-b from-[#1C0E42] via-[#160E33] to-[#100924] text-white'
+    }`}>
+      {/* Top Brand Tag & Theme Switcher */}
+      <div className="pt-4 flex items-center justify-between">
+        <div className="w-9" />
         <div className="inline-flex items-center gap-1.5 bg-[#FF8F12] text-white text-xs font-heading font-bold px-3.5 py-1 rounded-full uppercase tracking-wider clay-badge">
           <Sparkles size={13} />
           <span>English Vocabulary Immersion</span>
         </div>
+        {onToggleTheme ? (
+          <button
+            onClick={onToggleTheme}
+            title={theme === 'light' ? 'Mudar para Modo Escuro' : 'Mudar para Modo Claro'}
+            className="p-2 rounded-xl clay-btn clay-btn-dark active:scale-95 transition-all text-slate-300 hover:text-white"
+            aria-label="Toggle theme"
+          >
+            {theme === 'light' ? (
+              <Moon size={15} className="text-[#6732D8]" />
+            ) : (
+              <Sun size={15} className="text-[#FFD333]" />
+            )}
+          </button>
+        ) : (
+          <div className="w-9" />
+        )}
       </div>
 
       {/* Hero Mascot & Brand Identity */}

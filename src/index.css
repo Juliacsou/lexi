@@ -263,3 +263,252 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #6732D8;
 }
+
+/* ==============================================================================
+   CLAYMORPHISM LIGHT MODE SYSTEM (Porcelain & Soft Polymer Clay, ZERO Strokes)
+   ============================================================================== */
+
+body.light {
+  background-color: #EDE8F7;
+  color: #1E103E;
+}
+
+body.light ::-webkit-scrollbar-track {
+  background: #EDE8F7;
+}
+
+body.light ::-webkit-scrollbar-thumb {
+  background: #C7BEDC;
+}
+
+body.light ::-webkit-scrollbar-thumb:hover {
+  background: #6732D8;
+}
+
+/* Light Containers & Cards */
+.light .clay-card {
+  background: #FFFFFF;
+  border-radius: 1.5rem;
+  border: none !important;
+  box-shadow: 
+    inset 1.5px 1.5px 3px rgba(255, 255, 255, 1),
+    inset -2.5px -3px 5px rgba(160, 150, 190, 0.22),
+    0 10px 24px -4px rgba(103, 50, 216, 0.1),
+    0 4px 10px -2px rgba(0, 0, 0, 0.04);
+}
+
+.light .clay-card-elevated {
+  background: linear-gradient(145deg, #FFFFFF, #F5EFFE);
+  border-radius: 1.5rem;
+  border: none !important;
+  box-shadow: 
+    inset 2px 2px 4px rgba(255, 255, 255, 1),
+    inset -3px -3.5px 6px rgba(160, 150, 190, 0.25),
+    0 12px 28px -4px rgba(103, 50, 216, 0.12);
+}
+
+.light .clay-card-hero {
+  background: linear-gradient(135deg, #6732D8 0%, #4E1DB8 100%);
+  border-radius: 1.75rem;
+  border: none !important;
+  box-shadow: 
+    inset 2.5px 2.5px 5px rgba(255, 255, 255, 0.4),
+    inset -4px -5px 8px rgba(28, 8, 74, 0.5),
+    0 16px 36px -6px rgba(103, 50, 216, 0.35);
+}
+
+/* Light Sunken Clay Wells */
+.light .clay-well {
+  background: #EFEAF8;
+  border-radius: 1rem;
+  border: none !important;
+  box-shadow: 
+    inset 2.5px 2.5px 5px rgba(140, 130, 175, 0.25),
+    inset -1px -1px 2px rgba(255, 255, 255, 0.95);
+}
+
+/* Light Floating Clay Badges */
+.light .clay-badge {
+  border-radius: 9999px;
+  border: none !important;
+  box-shadow: 
+    inset 1.5px 1.5px 3px rgba(255, 255, 255, 0.8),
+    inset -2px -2px 4px rgba(160, 150, 190, 0.25),
+    0 4px 10px rgba(103, 50, 216, 0.08);
+}
+
+/* Light Muted/Secondary Clay Button (Clay Porcelain) */
+.light .clay-btn-dark, .light .btn-3d-dark {
+  background: linear-gradient(145deg, #FFFFFF, #EFE9F9);
+  color: #1E103E;
+  border: none !important;
+  box-shadow: 
+    inset 2px 2px 3px rgba(255, 255, 255, 1),
+    inset -2.5px -3px 5px rgba(150, 140, 185, 0.25),
+    0 6px 16px -3px rgba(103, 50, 216, 0.12);
+}
+.light .clay-btn-dark:hover, .light .btn-3d-dark:hover {
+  background: linear-gradient(145deg, #FFFFFF, #E4DCF5);
+  color: #12082A;
+}
+.light .clay-btn-dark:active, .light .btn-3d-dark:active {
+  box-shadow: 
+    inset 2.5px 2.5px 4px rgba(140, 130, 175, 0.35),
+    0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Light Text & Background Color Adaptors */
+.light h1, .light h2, .light h3, .light h4 {
+  color: #1E103E;
+}
+
+.light .clay-card-hero h1,
+.light .clay-card-hero h2,
+.light .clay-card-hero h3,
+.light .clay-card-hero h4,
+.light .clay-card-hero p,
+.light .clay-card-hero span {
+  color: #FFFFFF !important;
+}
+
+.light .clay-btn-orange,
+.light .clay-btn-orange *,
+.light .clay-btn-purple,
+.light .clay-btn-purple *,
+.light .clay-btn-green,
+.light .clay-btn-green *,
+.light .clay-btn-red,
+.light .clay-btn-red * {
+  color: #FFFFFF !important;
+}
+
+.light .clay-btn-yellow,
+.light .clay-btn-yellow * {
+  color: #261702 !important;
+}
+
+.light .text-white:not(.clay-btn-orange *):not(.clay-btn-purple *):not(.clay-btn-green *):not(.clay-btn-red *):not(.clay-card-hero *):not(.keep-white):not(.keep-white *) {
+  color: #1E103E !important;
+}
+
+.light .text-slate-200:not(.clay-card-hero *):not(.keep-white):not(.keep-white *) {
+  color: #382C56 !important;
+}
+
+.light .text-slate-300:not(.clay-card-hero *):not(.keep-white):not(.keep-white *) {
+  color: #554874 !important;
+}
+
+.light .text-slate-400:not(.clay-card-hero *):not(.keep-white):not(.keep-white *) {
+  color: #7A6F97 !important;
+}
+
+.light .text-slate-500:not(.clay-card-hero *):not(.keep-white):not(.keep-white *) {
+  color: #9A8FB8 !important;
+}
+
+.light .text-\[\#FFF0DA\]:not(.clay-card-hero *):not(.keep-white) {
+  color: #FF8F12 !important;
+}
+
+.light .text-\[\#FFF0DA\]\/80:not(.clay-card-hero *):not(.keep-white) {
+  color: #6C608A !important;
+}
+
+.light .text-\[\#FFF0DA\]\/70:not(.clay-card-hero *):not(.keep-white) {
+  color: #7A6F97 !important;
+}
+
+/* Light Background Overrides */
+.light .bg-\[\#100924\] {
+  background-color: #EDE8F7 !important;
+}
+
+.light .bg-\[\#150D30\] {
+  background-color: #FAF8FE !important;
+}
+
+.light .bg-\[\#160E33\]\/95 {
+  background-color: rgba(255, 255, 255, 0.94) !important;
+  box-shadow: 0 4px 20px rgba(103, 50, 216, 0.08) !important;
+}
+
+.light .bg-\[\#25154A\] {
+  background-color: #E6DEF5 !important;
+}
+
+.light .bg-\[\#26174D\] {
+  background-color: #E8E0F5 !important;
+}
+
+.light .bg-\[\#2B1656\] {
+  background-color: #EDE6F8 !important;
+}
+
+.light .bg-\[\#2B1754\] {
+  background-color: #EAE3F7 !important;
+}
+
+.light .bg-\[\#2B1B54\] {
+  background-color: #D9CEF0 !important;
+}
+
+.light .bg-\[\#321B66\] {
+  background-color: #E2D7F6 !important;
+}
+
+.light .bg-\[\#2D1B59\] {
+  background-color: #E8E0F7 !important;
+}
+
+.light .bg-\[\#241748\], .light .bg-\[\#241648\] {
+  background-color: #EAE2F7 !important;
+}
+
+.light .bg-\[\#281A54\] {
+  background-color: #EAE3F7 !important;
+}
+
+.light .bg-\[\#120B26\] {
+  background-color: #EFEAF8 !important;
+}
+
+.light .border-white\/10 {
+  border-color: rgba(103, 50, 216, 0.12) !important;
+}
+
+.light .border-white\/5 {
+  border-color: rgba(103, 50, 216, 0.08) !important;
+}
+
+.light .bg-white\/10 {
+  background-color: rgba(103, 50, 216, 0.08) !important;
+}
+
+.recovery-clay-card {
+  background: linear-gradient(145deg, #2D1428, #1E0C1C);
+}
+
+.light .recovery-clay-card {
+  background: linear-gradient(145deg, #FFF1F2, #FFE4E6) !important;
+  box-shadow: 
+    inset 1.5px 1.5px 3px rgba(255, 255, 255, 1),
+    inset -2.5px -3px 5px rgba(244, 63, 94, 0.2),
+    0 8px 20px -3px rgba(244, 63, 94, 0.15) !important;
+}
+
+.light .recovery-clay-card .text-rose-300 {
+  color: #E11D48 !important;
+}
+
+.light .recovery-clay-card .text-rose-200 {
+  color: #BE123C !important;
+}
+
+.light .path-winding-line {
+  background-color: #D6CEEC !important;
+  box-shadow: inset 1px 1px 2px rgba(120, 110, 150, 0.35) !important;
+}
+
+
+

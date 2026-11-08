@@ -206,7 +206,7 @@ export const ExerciseSession: React.FC<ExerciseSessionProps> = ({
                   </h3>
                 </div>
                 <img
-                  src="./assets/Logo_V2_Simplificada_Aprovada.png"
+                  src="./assets/Logo_V2_Simplificada_Transparente.png"
                   alt="Lexi"
                   className="w-10 h-10 object-contain drop-shadow"
                 />
@@ -233,8 +233,7 @@ export const ExerciseSession: React.FC<ExerciseSessionProps> = ({
           {/* RECOVERY ROUND PROMPT (If failed) */}
           {!isPassed && mode !== 'practice' && failedWords.length > 0 && (
             <div 
-              className="clay-card p-4 text-left space-y-2.5" 
-              style={{ background: 'linear-gradient(145deg, #2D1428, #1E0C1C)' }}
+              className="clay-card recovery-clay-card p-4 text-left space-y-2.5" 
             >
               <div className="flex items-center gap-2 text-rose-300 font-heading font-bold text-xs uppercase tracking-wider">
                 <AlertCircle size={15} />
@@ -394,7 +393,7 @@ export const ExerciseSession: React.FC<ExerciseSessionProps> = ({
       {/* ---------------------------------------------------- */}
       {isAnswered && (
         <div
-          className="fixed bottom-0 left-0 right-0 z-50 p-5 rounded-t-3xl animate-in slide-in-from-bottom duration-200 text-white"
+          className="fixed bottom-0 left-0 right-0 z-50 p-5 rounded-t-3xl animate-in slide-in-from-bottom duration-200 text-white keep-white"
           style={{
             background: isCorrect 
               ? 'linear-gradient(160deg, #184824, #0F2D17)' 
