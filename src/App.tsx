@@ -231,6 +231,7 @@ export default function App() {
               onSelectWorkbook={handleSelectWorkbook}
               user={user}
               onOpenAuth={() => setIsAuthModalOpen(true)}
+              streak={streak}
             />
           )}
 

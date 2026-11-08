@@ -1,5 +1,5 @@
 import React from 'react'
-import { ChevronLeft, Flame, RefreshCw, Sun, Moon } from 'lucide-react'
+import { ChevronLeft, Sun, Moon } from 'lucide-react'
 import type { User } from '@supabase/supabase-js'
 
 interface HeaderProps {
@@ -20,8 +20,6 @@ export const Header: React.FC<HeaderProps> = ({
   subtitle,
   showBack = false,
   onBack,
-  streak = 3,
-  onResetDemo,
   user,
   onOpenAuth,
   theme = 'light',
@@ -30,7 +28,7 @@ export const Header: React.FC<HeaderProps> = ({
   const avatarUrl = user?.user_metadata?.avatar_url || user?.user_metadata?.picture
 
   return (
-    <header className="sticky top-0 z-30 bg-[#160E33]/95 backdrop-blur-md px-4 py-3 flex items-center justify-between shadow-[0_4px_20px_rgba(0,0,0,0.35)]">
+    <header className="sticky top-0 z-30 bg-[#160E33]/95 backdrop-blur-md px-4 py-2.5 flex items-center justify-between shadow-[0_4px_20px_rgba(0,0,0,0.35)]">
       <div className="flex items-center gap-2">
         {showBack && onBack ? (
           <button
@@ -41,21 +39,12 @@ export const Header: React.FC<HeaderProps> = ({
             <ChevronLeft size={20} />
           </button>
         ) : (
-          <div className="flex items-center gap-2">
+          <div className="flex items-center py-0.5">
             <img
               src="./assets/Logo_V2_Simplificada_Transparente.png"
-              alt="Lexi Fox"
-              className="w-10 h-10 object-contain drop-shadow-md"
+              alt="Lexi"
+              className="w-12 h-12 object-contain drop-shadow-md transition-transform hover:scale-105"
             />
-            <div>
-              <div className="flex items-center gap-1.5">
-                <span className="font-heading font-bold text-lg text-white leading-tight">Lexi</span>
-                <span className="clay-badge bg-[#6732D8] text-white text-[11px] font-heading font-bold px-2.5 py-0.5 uppercase tracking-wider">
-                  C1
-                </span>
-              </div>
-              <p className="text-[11px] text-[#FFF0DA]/80 font-medium">Mais palavras. Mais confiança.</p>
-            </div>
           </div>
         )}
 
@@ -68,22 +57,6 @@ export const Header: React.FC<HeaderProps> = ({
       </div>
 
       <div className="flex items-center gap-2">
-        {onResetDemo && (
-          <button
-            onClick={onResetDemo}
-            title="Reset progress to test again"
-            className="p-2 text-slate-400 hover:text-white rounded-xl clay-btn clay-btn-dark active:scale-95 transition-all"
-          >
-            <RefreshCw size={14} />
-          </button>
-        )}
-
-        {/* Streak Badge */}
-        <div className="clay-badge flex items-center gap-1.5 bg-[#25154A] px-3 py-1 text-xs font-heading font-bold text-[#FF8F12]">
-          <Flame size={15} className="fill-[#FF8F12]" />
-          <span>{streak}d</span>
-        </div>
-
         {/* Theme Switcher Toggle (☀️ Claro / 🌙 Escuro) */}
         {onToggleTheme && (
           <button
@@ -93,9 +66,9 @@ export const Header: React.FC<HeaderProps> = ({
             aria-label="Toggle theme"
           >
             {theme === 'light' ? (
-              <Moon size={15} className="text-[#6732D8]" />
+              <Moon size={16} className="text-[#6732D8]" />
             ) : (
-              <Sun size={15} className="text-[#FFD333]" />
+              <Sun size={16} className="text-[#FFD333]" />
             )}
           </button>
         )}

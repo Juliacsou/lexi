@@ -1,5 +1,5 @@
 import React from 'react'
-import { Lock, Unlock, ChevronRight, BookOpen, Star, Sparkles, LogIn } from 'lucide-react'
+import { Lock, Unlock, ChevronRight, BookOpen, Star, Sparkles, LogIn, Flame } from 'lucide-react'
 import type { Workbook } from '../types'
 import type { User } from '@supabase/supabase-js'
 import { dataService } from '../services/dataService'
@@ -9,32 +9,38 @@ interface LevelDashboardProps {
   onSelectWorkbook: (workbook: Workbook) => void
   user?: User | null
   onOpenAuth?: () => void
+  streak?: number
 }
 
 export const LevelDashboard: React.FC<LevelDashboardProps> = ({
   workbooks,
   onSelectWorkbook,
   user,
-  onOpenAuth
+  onOpenAuth,
+  streak = 3
 }) => {
   return (
     <div className="p-4 space-y-5 pb-12">
       {/* Hero Card (Clay Hero, No Strokes) */}
       <div className="clay-card-hero p-6 relative overflow-hidden">
-        <div className="relative z-10">
-          <div className="inline-flex items-center gap-1.5 bg-[#FF8F12] text-white text-xs font-heading font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2.5 clay-badge">
-            <Sparkles size={13} />
-            <span>Active Level • C1</span>
+        <div className="relative z-10 space-y-3">
+          <div className="flex flex-wrap items-center gap-2">
+            <div className="inline-flex items-center gap-1.5 bg-[#FF8F12] text-white text-xs font-heading font-bold px-3 py-1 rounded-full uppercase tracking-wider clay-badge">
+              <Sparkles size={13} />
+              <span>Level C1 • Advanced</span>
+            </div>
+
+            <div className="inline-flex items-center gap-1.5 bg-black/25 backdrop-blur-sm text-[#FFD333] text-xs font-heading font-bold px-3 py-1 rounded-full clay-badge">
+              <Flame size={14} className="fill-[#FF8F12] text-[#FF8F12]" />
+              <span>{streak} Days Streak</span>
+            </div>
           </div>
 
-          <h2 className="text-2xl font-heading font-extrabold text-white leading-tight">
+          <h2 className="text-2xl sm:text-3xl font-heading font-extrabold text-white leading-tight">
             Advanced Vocabulary
           </h2>
-          <p className="text-[#FFF0DA] text-sm mt-1 max-w-[260px] leading-relaxed">
-            High-utility spoken and professional English. No translation, pure immersion.
-          </p>
 
-          <div className="mt-4 flex items-center gap-3 text-xs text-white/90 font-medium">
+          <div className="flex items-center gap-2.5 text-xs text-white/90 font-medium pt-1">
             <div className="flex items-center gap-1.5 bg-black/25 backdrop-blur-sm px-3 py-1 rounded-xl clay-badge">
               <BookOpen size={14} className="text-[#FFD333]" />
               <span>5 Workbooks</span>
@@ -84,12 +90,9 @@ export const LevelDashboard: React.FC<LevelDashboardProps> = ({
       {/* Section Title */}
       <div>
         <h3 className="text-base font-heading font-bold text-white flex items-center justify-between">
-          <span>Workbooks (Apostilas)</span>
+          <span>Workbooks</span>
           <span className="text-xs text-slate-400 font-normal">70% to unlock next</span>
         </h3>
-        <p className="text-xs text-slate-400 mt-0.5">
-          Order of increasing difficulty within C1. Complete 14/20 blocks with grade ≥ 8.0.
-        </p>
       </div>
 
       {/* Workbook Cards List (Clay Cards, No Strokes) */}
