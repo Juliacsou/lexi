@@ -554,6 +554,426 @@ body.light ::-webkit-scrollbar-thumb:hover {
   color: #FFD333 !important;
 }
 
+/* ==============================================================================
+   EXERCISE SESSION & MINI-CERTIFICATE CLAY STYLING (Dark & Light Modes)
+   ============================================================================== */
 
+/* --- 1. Base / Dark Mode Exercise Styling --- */
 
+.exercise-prompt-card {
+  background: #1C1238;
+}
 
+.exercise-prompt-text {
+  color: #FFFFFF;
+}
+
+.clay-option-btn {
+  border-radius: 1.25rem;
+  transition: transform 0.12s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.12s ease-out, background 0.15s ease;
+}
+
+.clay-option-btn.clay-option-default {
+  background: linear-gradient(145deg, #2D1A54, #21133F);
+  color: #F8FAFC;
+  box-shadow: 
+    inset 2px 2px 3px rgba(255, 255, 255, 0.14),
+    inset -2.5px -3.5px 5px rgba(0, 0, 0, 0.5),
+    0 6px 16px -3px rgba(6, 2, 16, 0.55);
+}
+
+.clay-option-btn.clay-option-default:hover {
+  background: linear-gradient(145deg, #372166, #28174C);
+  color: #FFFFFF;
+}
+
+.clay-option-btn.clay-option-default .clay-option-letter {
+  background: rgba(16, 8, 36, 0.6);
+  color: #C4B5FD;
+}
+
+.clay-option-btn.clay-option-selected {
+  background: linear-gradient(145deg, #FF9C2B, #FF8F12);
+  color: #FFFFFF;
+  box-shadow: 
+    inset 2px 2px 4px rgba(255, 255, 255, 0.5),
+    inset -3px -4px 6px rgba(160, 60, 0, 0.55),
+    0 8px 20px -3px rgba(255, 143, 18, 0.5);
+}
+
+.clay-option-btn.clay-option-selected .clay-option-letter {
+  background: rgba(0, 0, 0, 0.25);
+  color: #FFFFFF;
+}
+
+.clay-option-btn.clay-option-correct {
+  background: linear-gradient(145deg, #2ECC71, #22C55E);
+  color: #FFFFFF;
+  box-shadow: 
+    inset 2px 2px 4px rgba(255, 255, 255, 0.45),
+    inset -3px -4px 6px rgba(15, 90, 40, 0.55),
+    0 8px 20px -3px rgba(34, 197, 94, 0.5);
+}
+
+.clay-option-btn.clay-option-correct .clay-option-letter {
+  background: rgba(0, 0, 0, 0.25);
+  color: #FFFFFF;
+}
+
+.clay-option-btn.clay-option-incorrect {
+  background: linear-gradient(145deg, #F87171, #EF4444);
+  color: #FFFFFF;
+  box-shadow: 
+    inset 2px 2px 4px rgba(255, 255, 255, 0.45),
+    inset -3px -4px 6px rgba(140, 20, 20, 0.55),
+    0 8px 20px -3px rgba(239, 68, 68, 0.5);
+}
+
+.clay-option-btn.clay-option-incorrect .clay-option-letter {
+  background: rgba(0, 0, 0, 0.25);
+  color: #FFFFFF;
+}
+
+/* Exercise Badges & Counters (Dark Mode) */
+.exercise-mode-badge {
+  background: #251545;
+  color: #FF8F12;
+}
+
+.exercise-type-badge {
+  background: #2B1754;
+  color: #FFF0DA;
+}
+
+.exercise-counter {
+  color: #CBD5E1;
+}
+
+/* Score Card (Dark Mode) */
+.score-grade-passed {
+  color: #FFD333;
+}
+
+.score-grade-failed {
+  color: #FB7185;
+}
+
+.exercise-accuracy-num {
+  color: #FFFFFF;
+}
+
+.exercise-stat-label, .exercise-stat-max {
+  color: #94A3B8;
+}
+
+.exercise-score-divider {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.exercise-cutoff-text {
+  color: #CBD5E1;
+}
+
+.exercise-approved-text {
+  color: #34D399;
+}
+
+.exercise-below-text {
+  color: #FB7185;
+}
+
+/* Mini-Certificate (Dark Mode) */
+.clay-certificate {
+  background: linear-gradient(145deg, #2A1754, #1B0D38);
+  border-radius: 1.5rem;
+  border: none !important;
+  box-shadow: 
+    inset 2px 2px 5px rgba(255, 211, 51, 0.3),
+    inset -3px -4px 6px rgba(0, 0, 0, 0.5),
+    0 16px 36px -6px rgba(255, 211, 51, 0.18);
+}
+
+.clay-certificate .certificate-badge-text {
+  color: #FFD333;
+}
+
+.clay-certificate .certificate-title {
+  color: #FFFFFF;
+}
+
+.clay-certificate .certificate-subtitle {
+  color: #CBD5E1;
+}
+
+.clay-certificate .certificate-word-pill {
+  background: #130B26;
+  box-shadow: inset 1.5px 1.5px 3px rgba(0, 0, 0, 0.6), inset -1px -1px 2px rgba(255, 255, 255, 0.05);
+}
+
+.clay-certificate .certificate-check {
+  color: #34D399;
+}
+
+.clay-certificate .certificate-word-text {
+  color: #F1F5F9;
+}
+
+.clay-certificate .certificate-footer {
+  color: #94A3B8;
+}
+
+/* --- 2. Light Mode Exercise & Mini-Certificate Refinements --- */
+
+/* Prompt Card in Light Mode */
+.light .exercise-prompt-card {
+  background: #FFFFFF !important;
+  box-shadow: 
+    inset 1.5px 1.5px 3px rgba(255, 255, 255, 1),
+    inset -2.5px -3px 5px rgba(103, 50, 216, 0.12),
+    0 12px 28px -4px rgba(103, 50, 216, 0.12),
+    0 2px 6px rgba(0, 0, 0, 0.03) !important;
+}
+
+.light .exercise-prompt-text {
+  color: #1A0D38 !important;
+}
+
+/* Option Buttons in Light Mode (Porcelain Clay with Tactile Lavender Inset & Clear Contrast) */
+.light .clay-option-btn.clay-option-default {
+  background: linear-gradient(145deg, #FFFFFF, #F7F2FE) !important;
+  box-shadow: 
+    inset 1.5px 1.5px 3px rgba(255, 255, 255, 1),
+    inset -2.5px -3.5px 5px rgba(103, 50, 216, 0.16),
+    0 6px 16px -3px rgba(103, 50, 216, 0.12) !important;
+}
+
+.light .clay-option-btn.clay-option-default:hover {
+  background: linear-gradient(145deg, #FFFFFF, #EFE6FB) !important;
+  box-shadow: 
+    inset 1.5px 1.5px 3px rgba(255, 255, 255, 1),
+    inset -2.5px -3.5px 5px rgba(103, 50, 216, 0.22),
+    0 8px 20px -3px rgba(103, 50, 216, 0.18) !important;
+}
+
+.light .clay-option-btn.clay-option-default .clay-option-label {
+  color: #1A0D38 !important;
+  font-weight: 700 !important;
+}
+
+.light .clay-option-btn.clay-option-default .clay-option-letter {
+  background: #EDE6F9 !important;
+  color: #6732D8 !important;
+  box-shadow: inset 1px 1px 2px rgba(255, 255, 255, 0.8), inset -1px -1px 2px rgba(103, 50, 216, 0.15) !important;
+}
+
+/* Option Buttons State in Light Mode */
+.light .clay-option-btn.clay-option-selected {
+  background: linear-gradient(145deg, #FF9C2B, #FF8F12) !important;
+  box-shadow: 
+    inset 2px 2px 4px rgba(255, 255, 255, 0.6),
+    inset -3px -4px 6px rgba(160, 60, 0, 0.55),
+    0 8px 20px -3px rgba(255, 143, 18, 0.5) !important;
+}
+
+.light .clay-option-btn.clay-option-selected .clay-option-label {
+  color: #FFFFFF !important;
+}
+
+.light .clay-option-btn.clay-option-selected .clay-option-letter {
+  background: rgba(0, 0, 0, 0.22) !important;
+  color: #FFFFFF !important;
+}
+
+.light .clay-option-btn.clay-option-correct {
+  background: linear-gradient(145deg, #2ECC71, #10B981) !important;
+  box-shadow: 
+    inset 2px 2px 4px rgba(255, 255, 255, 0.5),
+    inset -3px -4px 6px rgba(15, 90, 40, 0.55),
+    0 8px 20px -3px rgba(16, 185, 129, 0.5) !important;
+}
+
+.light .clay-option-btn.clay-option-correct .clay-option-label {
+  color: #FFFFFF !important;
+}
+
+.light .clay-option-btn.clay-option-correct .clay-option-letter {
+  background: rgba(0, 0, 0, 0.22) !important;
+  color: #FFFFFF !important;
+}
+
+.light .clay-option-btn.clay-option-incorrect {
+  background: linear-gradient(145deg, #F87171, #EF4444) !important;
+  box-shadow: 
+    inset 2px 2px 4px rgba(255, 255, 255, 0.5),
+    inset -3px -4px 6px rgba(140, 20, 20, 0.55),
+    0 8px 20px -3px rgba(239, 68, 68, 0.5) !important;
+}
+
+.light .clay-option-btn.clay-option-incorrect .clay-option-label {
+  color: #FFFFFF !important;
+}
+
+.light .clay-option-btn.clay-option-incorrect .clay-option-letter {
+  background: rgba(0, 0, 0, 0.22) !important;
+  color: #FFFFFF !important;
+}
+
+/* Badges & Top bar in Light Mode */
+.light .exercise-mode-badge {
+  background: #FEF3C7 !important;
+  color: #B45309 !important;
+  box-shadow: inset 1px 1px 2px #FFFFFF, inset -1.5px -1.5px 3px rgba(180, 83, 9, 0.2), 0 3px 8px rgba(180, 83, 9, 0.1) !important;
+}
+
+.light .exercise-type-badge {
+  background: #EDE8F8 !important;
+  color: #6732D8 !important;
+  box-shadow: inset 1px 1px 2px #FFFFFF, inset -1.5px -1.5px 3px rgba(103, 50, 216, 0.18), 0 3px 8px rgba(103, 50, 216, 0.08) !important;
+}
+
+.light .exercise-counter {
+  color: #554874 !important;
+}
+
+.light .exercise-exit-btn, .light .exercise-audio-btn {
+  color: #554874 !important;
+}
+
+.light .exercise-exit-btn:hover, .light .exercise-audio-btn:hover {
+  color: #1A0D38 !important;
+}
+
+.light .exercise-track-well {
+  background: #EBE4F7 !important;
+  box-shadow: inset 2px 2px 4px rgba(103, 50, 216, 0.2), inset -1px -1px 2px rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Results Screen in Light Mode */
+.light .results-heading-tag {
+  color: #C2410C !important;
+}
+
+.light .results-heading-title {
+  color: #1A0D38 !important;
+}
+
+.light .results-heading-desc {
+  color: #4A3E68 !important;
+}
+
+/* Score Card in Light Mode (High Contrast & Golden Grade) */
+.light .exercise-score-card {
+  background: #FFFFFF !important;
+  box-shadow: 
+    inset 1.5px 1.5px 3px rgba(255, 255, 255, 1),
+    inset -2.5px -3px 5px rgba(103, 50, 216, 0.12),
+    0 12px 28px -4px rgba(103, 50, 216, 0.1) !important;
+}
+
+.light .score-grade-passed {
+  color: #D97706 !important; /* Rich amber-gold, high contrast on white (4.6:1 WCAG AA) */
+}
+
+.light .score-grade-failed {
+  color: #E11D48 !important; /* Clear rose-600 */
+}
+
+.light .exercise-accuracy-num {
+  color: #1A0D38 !important;
+}
+
+.light .exercise-stat-label {
+  color: #645582 !important;
+}
+
+.light .exercise-stat-max {
+  color: #8375A2 !important;
+}
+
+.light .exercise-score-divider {
+  background: rgba(103, 50, 216, 0.15) !important;
+}
+
+.light .exercise-cutoff-text {
+  color: #4A3E68 !important;
+}
+
+.light .exercise-approved-text {
+  color: #059669 !important; /* Deep emerald-600 */
+}
+
+.light .exercise-below-text {
+  color: #E11D48 !important;
+}
+
+/* MINI-CERTIFICATE in Light Mode (Prestigious Ivory & Gold Embossed Porcelain Diploma) */
+.light .clay-certificate {
+  background: linear-gradient(145deg, #FFFFFF 0%, #FFFDF8 45%, #FFF8EA 100%) !important;
+  border-radius: 1.5rem !important;
+  border: none !important;
+  box-shadow: 
+    inset 2px 2px 4px rgba(255, 255, 255, 1),
+    inset -3px -3.5px 6px rgba(217, 119, 6, 0.18),
+    0 14px 32px -4px rgba(217, 119, 6, 0.15),
+    0 4px 12px rgba(103, 50, 216, 0.06) !important;
+}
+
+.light .clay-certificate .certificate-header-border {
+  border-color: rgba(217, 119, 6, 0.22) !important;
+}
+
+.light .clay-certificate .certificate-badge-text {
+  color: #B45309 !important; /* Deep polished gold amber, 7.5:1 contrast on ivory */
+  font-weight: 800 !important;
+}
+
+.light .clay-certificate .certificate-title {
+  color: #1A0D38 !important;
+  font-weight: 800 !important;
+}
+
+.light .clay-certificate .certificate-subtitle {
+  color: #4A3E68 !important;
+  font-weight: 700 !important;
+}
+
+.light .clay-certificate .certificate-word-pill {
+  background: #FFFFFF !important;
+  box-shadow: 
+    inset 1px 1px 2px rgba(255, 255, 255, 1),
+    inset -1.5px -1.5px 3px rgba(160, 150, 190, 0.2),
+    0 3px 8px rgba(103, 50, 216, 0.08) !important;
+}
+
+.light .clay-certificate .certificate-check {
+  color: #059669 !important; /* Deep emerald */
+}
+
+.light .clay-certificate .certificate-word-text {
+  color: #1A0D38 !important;
+  font-weight: 700 !important;
+}
+
+.light .clay-certificate .certificate-footer {
+  color: #7A6F97 !important;
+}
+
+/* Recovery Card Light Enhancements */
+.light .recovery-header {
+  color: #BE123C !important;
+}
+
+.light .recovery-word-badge {
+  background: #FFFFFF !important;
+  color: #BE123C !important;
+  box-shadow: inset 1px 1px 2px #FFFFFF, inset -1.5px -1.5px 3px rgba(225, 29, 72, 0.15), 0 2px 6px rgba(225, 29, 72, 0.08) !important;
+}
+
+.light .recovery-desc {
+  color: #4A3E68 !important;
+}
+
+/* Flashcards & Context Wells in Light Mode */
+.light .clay-well .text-\[\#FF8F12\] {
+  color: #C2410C !important;
+}

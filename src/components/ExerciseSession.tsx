@@ -130,17 +130,17 @@ export const ExerciseSession: React.FC<ExerciseSessionProps> = ({
 
           {/* Heading */}
           <div>
-            <span className="text-xs font-heading font-bold uppercase tracking-wider text-[#FF8F12]">
+            <span className="text-xs font-heading font-bold uppercase tracking-wider results-heading-tag text-[#FF8F12]">
               {mode === 'practice' ? 'Practice Completed' : mode === 'recovery' ? 'Recovery Round Finished' : 'Official Test Result'}
             </span>
-            <h2 className="text-3xl font-heading font-extrabold text-white mt-1">
+            <h2 className="text-3xl font-heading font-extrabold text-white mt-1 results-heading-title">
               {mode === 'practice'
                 ? 'Great Training!'
                 : isPassed
                 ? 'PASSED! Unit Mastered 🎉'
                 : 'Needs Recovery'}
             </h2>
-            <p className="text-sm text-slate-300 mt-1">
+            <p className="text-sm text-slate-300 mt-1 results-heading-desc">
               {mode === 'practice'
                 ? 'Practice exercises completed. Now take the Official Test to certify the block!'
                 : isPassed
@@ -150,36 +150,36 @@ export const ExerciseSession: React.FC<ExerciseSessionProps> = ({
           </div>
 
           {/* Score Card */}
-          <div className="clay-card p-5">
+          <div className="clay-card exercise-score-card p-5">
             <div className="flex items-center justify-around">
               <div>
-                <span className="text-xs text-slate-400 font-medium">Final Grade</span>
-                <p className={`text-4xl font-heading font-extrabold ${isPassed || mode === 'practice' ? 'text-[#FFD333]' : 'text-rose-400'}`}>
+                <span className="text-xs text-slate-400 font-medium exercise-stat-label">Final Grade</span>
+                <p className={`text-4xl font-heading font-extrabold ${isPassed || mode === 'practice' ? 'score-grade-passed' : 'score-grade-failed'}`}>
                   {finalScore.toFixed(1)}
-                  <span className="text-sm text-slate-400 font-normal"> / 10.0</span>
+                  <span className="text-sm text-slate-400 font-normal exercise-stat-max"> / 10.0</span>
                 </p>
               </div>
 
-              <div className="h-10 w-px bg-white/10" />
+              <div className="h-10 w-px exercise-score-divider bg-white/10" />
 
               <div>
-                <span className="text-xs text-slate-400 font-medium">Accuracy</span>
-                <p className="text-3xl font-heading font-bold text-white">
+                <span className="text-xs text-slate-400 font-medium exercise-stat-label">Accuracy</span>
+                <p className="text-3xl font-heading font-bold text-white exercise-accuracy-num">
                   {correctCount}
-                  <span className="text-sm text-slate-400 font-normal"> / {totalExercises}</span>
+                  <span className="text-sm text-slate-400 font-normal exercise-stat-max"> / {totalExercises}</span>
                 </p>
               </div>
             </div>
 
             {/* Passing bar indicator */}
-            <div className="mt-4 pt-3 border-t border-white/5">
-              <div className="flex justify-between text-xs text-slate-300 mb-1">
+            <div className="mt-4 pt-3 border-t border-white/5 exercise-cutoff-border">
+              <div className="flex justify-between text-xs text-slate-300 mb-1 exercise-cutoff-text">
                 <span>Passing Cutoff: 8.0 (80%)</span>
-                <span className={isPassed ? 'text-emerald-400 font-bold' : 'text-rose-400 font-bold'}>
+                <span className={isPassed ? 'exercise-approved-text font-bold' : 'exercise-below-text font-bold'}>
                   {isPassed ? 'APPROVED' : 'BELOW CUTOFF'}
                 </span>
               </div>
-              <div className="w-full clay-well h-3 overflow-hidden p-0.5">
+              <div className="w-full clay-well exercise-track-well h-3 overflow-hidden p-0.5">
                 <div
                   className={`h-full rounded-full transition-all duration-500 ${isPassed ? 'bg-emerald-500' : 'bg-rose-500'}`}
                   style={{ width: `${Math.min(100, (finalScore / 10) * 100)}%` }}
@@ -190,18 +190,13 @@ export const ExerciseSession: React.FC<ExerciseSessionProps> = ({
 
           {/* MINI-CERTIFICATE (If Passed in Test mode) */}
           {isPassed && mode !== 'practice' && (
-            <div 
-              className="clay-card-elevated p-5 text-left relative overflow-hidden"
-              style={{
-                boxShadow: 'inset 2px 2px 5px rgba(255, 211, 51, 0.25), inset -3px -4px 6px rgba(0, 0, 0, 0.5), 0 16px 36px -6px rgba(255, 211, 51, 0.15)'
-              }}
-            >
-              <div className="flex items-center justify-between pb-3 border-b border-white/10">
+            <div className="clay-certificate p-5 text-left relative overflow-hidden">
+              <div className="flex items-center justify-between pb-3 border-b certificate-header-border border-amber-500/20">
                 <div>
-                  <span className="text-[10px] font-heading font-bold uppercase tracking-wider text-[#FFD333]">
+                  <span className="text-[10px] font-heading font-bold uppercase tracking-wider certificate-badge-text text-[#FFD333]">
                     Official Block Mini-Certificate
                   </span>
-                  <h3 className="text-base font-heading font-extrabold text-white">
+                  <h3 className="text-base font-heading font-extrabold text-white certificate-title">
                     {block.title} • Certified
                   </h3>
                 </div>
@@ -213,18 +208,18 @@ export const ExerciseSession: React.FC<ExerciseSessionProps> = ({
               </div>
 
               <div className="mt-3">
-                <p className="text-xs text-slate-300 mb-2 font-medium">10 Target Words Dominated:</p>
+                <p className="text-xs text-slate-300 mb-2 font-medium certificate-subtitle">10 Target Words Dominated:</p>
                 <div className="grid grid-cols-2 gap-1.5 text-xs">
                   {blockWords.map(w => (
-                    <div key={w.word} className="flex items-center gap-1.5 text-slate-200 clay-well px-2.5 py-1.5 rounded-xl">
-                      <CheckCircle size={13} className="text-emerald-400 shrink-0" />
-                      <span className="font-semibold">{w.word}</span>
+                    <div key={w.word} className="flex items-center gap-1.5 certificate-word-pill px-2.5 py-1.5 rounded-xl">
+                      <CheckCircle size={13} className="certificate-check shrink-0 text-emerald-400" />
+                      <span className="font-semibold certificate-word-text">{w.word}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
-              <p className="text-[10px] text-slate-400 mt-3 text-center italic">
+              <p className="text-[10px] text-slate-400 mt-3 text-center italic certificate-footer">
                 Lexi English Immersion • Workbook progression updated towards 70% threshold.
               </p>
             </div>
@@ -235,18 +230,18 @@ export const ExerciseSession: React.FC<ExerciseSessionProps> = ({
             <div 
               className="clay-card recovery-clay-card p-4 text-left space-y-2.5" 
             >
-              <div className="flex items-center gap-2 text-rose-300 font-heading font-bold text-xs uppercase tracking-wider">
+              <div className="flex items-center gap-2 recovery-header text-rose-300 font-heading font-bold text-xs uppercase tracking-wider">
                 <AlertCircle size={15} />
                 <span>Target Words Requiring Reinforcement ({failedWords.length}):</span>
               </div>
               <div className="flex flex-wrap gap-1.5">
                 {failedWords.map(w => (
-                  <span key={w} className="clay-badge bg-rose-500/25 text-rose-200 text-xs px-3 py-1 font-bold">
+                  <span key={w} className="clay-badge recovery-word-badge text-xs px-3 py-1 font-bold">
                     {w}
                   </span>
                 ))}
               </div>
-              <p className="text-xs text-slate-300 leading-relaxed pt-1">
+              <p className="text-xs text-slate-300 recovery-desc leading-relaxed pt-1">
                 Before attempting the official test again, complete the tailored Recovery Round below to master these missed words.
               </p>
             </div>
@@ -290,23 +285,23 @@ export const ExerciseSession: React.FC<ExerciseSessionProps> = ({
           <div className="flex items-center gap-2">
             <button
               onClick={onFinish}
-              className="clay-btn clay-btn-dark p-2 -ml-1 text-slate-300 hover:text-white rounded-xl"
+              className="clay-btn clay-btn-dark exercise-exit-btn p-2 -ml-1 text-slate-300 hover:text-white rounded-xl"
               aria-label="Exit exercise session"
             >
               <X size={18} />
             </button>
-            <span className="clay-badge bg-[#251545] text-[#FF8F12] text-[11px] font-heading font-bold px-3 py-1 uppercase tracking-wider">
+            <span className="clay-badge exercise-mode-badge bg-[#251545] text-[#FF8F12] text-[11px] font-heading font-bold px-3 py-1 uppercase tracking-wider">
               {mode === 'practice' ? 'Practice Mode' : mode === 'recovery' ? 'Recovery Round' : 'Official Test'}
             </span>
           </div>
 
-          <span className="text-slate-300 font-heading font-bold text-xs">
+          <span className="exercise-counter text-slate-300 font-heading font-bold text-xs">
             {currentIndex + 1} / {totalExercises}
           </span>
         </div>
 
         {/* Animated Progress Bar in sunken clay well */}
-        <div className="w-full clay-well h-3 overflow-hidden p-0.5">
+        <div className="w-full clay-well exercise-track-well h-3 overflow-hidden p-0.5">
           <div
             className="h-full rounded-full transition-all duration-300 bg-gradient-to-r from-[#FF8F12] to-[#FFD333]"
             style={{ width: `${progressPercent}%` }}
@@ -318,13 +313,13 @@ export const ExerciseSession: React.FC<ExerciseSessionProps> = ({
       <div className="space-y-5 my-auto">
         {/* Type pill + Audio read */}
         <div className="flex items-center justify-between">
-          <span className="clay-badge bg-[#2B1754] text-[#FFF0DA] text-[11px] font-heading font-bold px-3.5 py-1.5 uppercase tracking-wider">
+          <span className="clay-badge exercise-type-badge bg-[#2B1754] text-[#FFF0DA] text-[11px] font-heading font-bold px-3.5 py-1.5 uppercase tracking-wider">
             {currentExercise.type === 'sentence_completion' ? 'Fill in the blanks' : 'Synonym Matching'}
           </span>
 
           <button
             onClick={() => handleSpeak(currentExercise.prompt)}
-            className="clay-btn clay-btn-dark p-2 rounded-xl text-slate-300 hover:text-[#FF8F12]"
+            className="clay-btn clay-btn-dark exercise-audio-btn p-2 rounded-xl text-slate-300 hover:text-[#FF8F12]"
             title="Read question"
           >
             <Volume2 size={16} />
@@ -332,8 +327,8 @@ export const ExerciseSession: React.FC<ExerciseSessionProps> = ({
         </div>
 
         {/* Prompt Container */}
-        <div className="clay-card p-6">
-          <h3 className="text-lg sm:text-xl font-heading font-bold text-white leading-relaxed">
+        <div className="clay-card exercise-prompt-card p-6">
+          <h3 className="text-lg sm:text-xl font-heading font-bold exercise-prompt-text text-white leading-relaxed">
             {currentExercise.prompt}
           </h3>
         </div>
@@ -344,16 +339,16 @@ export const ExerciseSession: React.FC<ExerciseSessionProps> = ({
             const isSelected = selectedOption === opt
             const isCorrectOption = opt.trim().toLowerCase() === currentExercise.correct_answer.trim().toLowerCase()
 
-            let buttonClass = 'clay-btn-dark'
+            let optionStateClass = 'clay-option-default'
 
             if (isAnswered) {
               if (isCorrectOption) {
-                buttonClass = 'clay-btn-green'
+                optionStateClass = 'clay-option-correct'
               } else if (isSelected && !isCorrect) {
-                buttonClass = 'clay-btn-red'
+                optionStateClass = 'clay-option-incorrect'
               }
             } else if (isSelected) {
-              buttonClass = 'clay-btn-orange'
+              optionStateClass = 'clay-option-selected'
             }
 
             return (
@@ -361,10 +356,10 @@ export const ExerciseSession: React.FC<ExerciseSessionProps> = ({
                 key={oIdx}
                 onClick={() => handleSelectOption(opt)}
                 disabled={isAnswered}
-                className={`w-full py-3.5 px-5 rounded-2xl clay-btn ${buttonClass} text-base font-bold text-left flex items-center justify-between`}
+                className={`w-full py-3.5 px-5 rounded-2xl clay-btn clay-option-btn ${optionStateClass} text-base font-bold text-left flex items-center justify-between`}
               >
-                <span>{opt}</span>
-                <span className="text-xs opacity-60 font-mono">
+                <span className="clay-option-label">{opt}</span>
+                <span className="clay-option-letter text-xs font-mono font-bold px-2 py-1 rounded-lg">
                   {String.fromCharCode(65 + oIdx)}
                 </span>
               </button>
