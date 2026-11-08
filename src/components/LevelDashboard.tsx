@@ -1,5 +1,5 @@
 import React from 'react'
-import { Lock, Unlock, ChevronRight, BookOpen, Star, Sparkles, LogIn, Flame } from 'lucide-react'
+import { Lock, Unlock, ChevronRight, LogIn, Flame } from 'lucide-react'
 import type { Workbook } from '../types'
 import type { User } from '@supabase/supabase-js'
 import { dataService } from '../services/dataService'
@@ -23,31 +23,36 @@ export const LevelDashboard: React.FC<LevelDashboardProps> = ({
     <div className="p-4 space-y-5 pb-12">
       {/* Hero Card (Clay Hero, No Strokes) */}
       <div className="clay-card-hero p-6 relative overflow-hidden">
-        <div className="relative z-10 space-y-3">
-          <div className="flex flex-wrap items-center gap-2">
-            <div className="inline-flex items-center gap-1.5 bg-[#FF8F12] text-white text-xs font-heading font-bold px-3 py-1 rounded-full uppercase tracking-wider clay-badge">
-              <Sparkles size={13} />
-              <span>Level C1 • Advanced</span>
-            </div>
-
-            <div className="inline-flex items-center gap-1.5 bg-black/25 backdrop-blur-sm text-[#FFD333] text-xs font-heading font-bold px-3 py-1 rounded-full clay-badge">
-              <Flame size={14} className="fill-[#FF8F12] text-[#FF8F12]" />
-              <span>{streak} Days Streak</span>
-            </div>
-          </div>
-
+        <div className="relative z-10 space-y-4">
           <h2 className="text-2xl sm:text-3xl font-heading font-extrabold text-white leading-tight">
             Advanced Vocabulary
           </h2>
 
-          <div className="flex items-center gap-2.5 text-xs text-white/90 font-medium pt-1">
-            <div className="flex items-center gap-1.5 bg-black/25 backdrop-blur-sm px-3 py-1 rounded-xl clay-badge">
-              <BookOpen size={14} className="text-[#FFD333]" />
-              <span>5 Workbooks</span>
+          {/* Horizontal Stats Box (C1 Level & Days Streak) */}
+          <div className="inline-flex items-center clay-well p-3 rounded-2xl bg-black/25 backdrop-blur-sm shadow-[inset_2px_2px_4px_rgba(0,0,0,0.5)]">
+            {/* C1 / Level */}
+            <div className="text-center px-4">
+              <p className="text-3xl sm:text-4xl font-heading font-extrabold text-white leading-none">
+                C1
+              </p>
+              <span className="text-[11px] font-heading font-bold uppercase tracking-wider text-[#FFD333] mt-1.5 block">
+                Level
+              </span>
             </div>
-            <div className="flex items-center gap-1.5 bg-black/25 backdrop-blur-sm px-3 py-1 rounded-xl clay-badge">
-              <Star size={14} className="text-[#FFD333]" />
-              <span>1,000 Words</span>
+
+            <div className="w-px h-10 bg-white/20" />
+
+            {/* Streak Number / Days */}
+            <div className="text-center px-4">
+              <div className="flex items-center justify-center gap-1.5 leading-none">
+                <Flame size={22} className="fill-[#FF8F12] text-[#FF8F12]" />
+                <span className="text-3xl sm:text-4xl font-heading font-extrabold text-white">
+                  {streak}
+                </span>
+              </div>
+              <span className="text-[11px] font-heading font-bold uppercase tracking-wider text-[#FFD333] mt-1.5 block">
+                Days
+              </span>
             </div>
           </div>
         </div>

@@ -366,9 +366,17 @@ body.light ::-webkit-scrollbar-thumb:hover {
 .light .clay-card-hero h2,
 .light .clay-card-hero h3,
 .light .clay-card-hero h4,
-.light .clay-card-hero p,
-.light .clay-card-hero span {
+.light .clay-card-hero p:not(.text-\[\#FFD333\]):not(.text-\[\#FF8F12\]),
+.light .clay-card-hero span:not(.text-\[\#FFD333\]):not(.text-\[\#FF8F12\]) {
   color: #FFFFFF !important;
+}
+
+.light .clay-card-hero .text-\[\#FFD333\] {
+  color: #FFD333 !important;
+}
+
+.light .clay-card-hero .text-\[\#FF8F12\] {
+  color: #FF8F12 !important;
 }
 
 .light .clay-btn-orange,
