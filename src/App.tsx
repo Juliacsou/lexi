@@ -4,8 +4,11 @@ import { LevelDashboard } from './components/LevelDashboard'
 import { WorkbookPath } from './components/WorkbookPath'
 import { FlashcardsView } from './components/FlashcardsView'
 import { ExerciseSession } from './components/ExerciseSession'
+import { AuthModal } from './components/AuthModal'
 import { dataService } from './services/dataService'
+import { authService } from './services/authService'
 import type { Workbook, Block, Exercise } from './types'
+import type { User } from '@supabase/supabase-js'
 
 type Screen = 'dashboard' | 'workbook' | 'flashcards' | 'exercise'
 
@@ -16,8 +19,17 @@ export default function App() {
   const [exerciseMode, setExerciseMode] = useState<'practice' | 'test' | 'recovery'>('test')
   const [activeExercises, setActiveExercises] = useState<Exercise[]>([])
   const [streak, setStreak] = useState<number>(3)
+  const [user, setUser] = useState<User | null>(null)
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false)
 
   const workbooks = dataService.getWorkbooks()
+
+  // Track Supabase auth state
+  useEffect(() => {
+    authService.getUser().then(u => setUser(u))
+    const unsubscribe = authService.onAuthStateChange(u => setUser(u))
+    return () => unsubscribe()
+  }, [])
 
   // Default select first workbook on initial load if none selected
   useEffect(() => {
@@ -113,7 +125,28 @@ export default function App() {
           onBack={handleBack}
           streak={streak}
           onResetDemo={handleResetDemo}
+          user={user}
+          onOpenAuth={() => setIsAuthModalOpen(true)}
         />
+
+        {/* Guest prompt banner if not logged in */}
+        {!user && currentScreen === 'dashboard' && (
+          <div className="mx-4 mt-3 p-3 bg-gradient-to-r from-[#2B1758] to-[#1F1142] border border-[#48288C] rounded-2xl flex items-center justify-between gap-3 shadow-md">
+            <div className="flex items-center gap-2.5">
+              <span className="text-xl">🦊</span>
+              <div>
+                <p className="text-xs font-heading font-bold text-white">Save your study history</p>
+                <p className="text-[11px] text-[#FFF0DA]/70">Sign in to sync your badges and notes</p>
+              </div>
+            </div>
+            <button
+              onClick={() => setIsAuthModalOpen(true)}
+              className="px-3 py-1.5 rounded-xl bg-white text-slate-900 font-heading font-bold text-xs shadow-md hover:bg-slate-100 active:scale-95 transition-all whitespace-nowrap"
+            >
+              Sign In
+            </button>
+          </div>
+        )}
 
         {/* Content Body */}
         <main className="flex-1">
@@ -156,6 +189,14 @@ export default function App() {
             />
           )}
         </main>
+
+        {/* Google Authentication & Profile Modal */}
+        <AuthModal
+          isOpen={isAuthModalOpen}
+          onClose={() => setIsAuthModalOpen(false)}
+          user={user}
+          streak={streak}
+        />
       </div>
     </div>
   )
