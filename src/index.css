@@ -1,0 +1,139 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-fredoka: 'Fredoka', cursive, sans-serif;
+    --font-nunito: 'Nunito', sans-serif;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-nunito);
+    background-color: #120B26;
+    color: #F8FAFC;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  h1, h2, h3, h4, .font-heading {
+    font-family: var(--font-fredoka);
+  }
+}
+
+/* Duolingo-style 3D Mechanical Tactile Buttons */
+.btn-3d {
+  position: relative;
+  transition: all 0.1s ease-in-out;
+  user-select: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-fredoka);
+  font-weight: 600;
+  border-radius: 1rem;
+}
+
+.btn-3d:active {
+  transform: translateY(4px);
+}
+
+.btn-3d-purple {
+  background-color: #6732D8;
+  color: #FFFFFF;
+  border-bottom: 5px solid #481CA8;
+  box-shadow: 0 4px 12px rgba(103, 50, 216, 0.35);
+}
+.btn-3d-purple:hover {
+  background-color: #7542E6;
+}
+.btn-3d-purple:active {
+  border-bottom-width: 1px;
+  box-shadow: 0 2px 4px rgba(103, 50, 216, 0.2);
+}
+
+.btn-3d-fox {
+  background-color: #FF8F12;
+  color: #FFFFFF;
+  border-bottom: 5px solid #C46500;
+  box-shadow: 0 4px 12px rgba(255, 143, 18, 0.35);
+}
+.btn-3d-fox:hover {
+  background-color: #FFA133;
+}
+.btn-3d-fox:active {
+  border-bottom-width: 1px;
+  box-shadow: 0 2px 4px rgba(255, 143, 18, 0.2);
+}
+
+.btn-3d-yellow {
+  background-color: #FFD333;
+  color: #1A1202;
+  border-bottom: 5px solid #C99E00;
+  box-shadow: 0 4px 12px rgba(255, 211, 51, 0.35);
+}
+.btn-3d-yellow:hover {
+  background-color: #FFDC59;
+}
+.btn-3d-yellow:active {
+  border-bottom-width: 1px;
+  box-shadow: 0 2px 4px rgba(255, 211, 51, 0.2);
+}
+
+.btn-3d-green {
+  background-color: #22C55E;
+  color: #FFFFFF;
+  border-bottom: 5px solid #15803D;
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.35);
+}
+.btn-3d-green:hover {
+  background-color: #2ED869;
+}
+.btn-3d-green:active {
+  border-bottom-width: 1px;
+  box-shadow: 0 2px 4px rgba(34, 197, 94, 0.2);
+}
+
+.btn-3d-red {
+  background-color: #EF4444;
+  color: #FFFFFF;
+  border-bottom: 5px solid #B91C1C;
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.35);
+}
+.btn-3d-red:hover {
+  background-color: #F87171;
+}
+.btn-3d-red:active {
+  border-bottom-width: 1px;
+  box-shadow: 0 2px 4px rgba(239, 68, 68, 0.2);
+}
+
+.btn-3d-dark {
+  background-color: #281B4E;
+  color: #E2E8F0;
+  border-bottom: 5px solid #1A1135;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+.btn-3d-dark:hover {
+  background-color: #332363;
+}
+.btn-3d-dark:active {
+  border-bottom-width: 1px;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #120B26;
+}
+::-webkit-scrollbar-thumb {
+  background: #2D1E56;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #6732D8;
+}

@@ -1,0 +1,17 @@
+import { createClient } from '@supabase/supabase-js'
+
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://jeijmbezltxwqjzfzqyx.supabase.co'
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || ''
+
+export const isSupabaseConfigured = Boolean(supabaseUrl && supabaseAnonKey && supabaseAnonKey !== 'YOUR_ANON_KEY')
+
+export const supabase = createClient(
+  supabaseUrl,
+  supabaseAnonKey || 'dummy-key-for-initialization',
+  {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+    }
+  }
+)
