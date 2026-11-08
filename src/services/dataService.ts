@@ -137,6 +137,8 @@ class DataService {
     return rawLexiData.workbooks as Workbook[]
   }
 
+  private generatedExercisesCache: Record<string, Exercise[]> = {}
+
   getBlocks(workbookCode: string): Block[] {
     return (rawLexiData.blocks as Block[]).filter(b => b.workbook_code === workbookCode)
   }
@@ -150,7 +152,87 @@ class DataService {
   }
 
   getExercises(blockCode: string): Exercise[] {
-    return (rawLexiData.exercises as Exercise[]).filter(e => e.block_code === blockCode)
+    // 1. Check if there are pre-authored exercises in rawLexiData
+    const staticExercises = (rawLexiData.exercises as Exercise[]).filter(e => e.block_code === blockCode)
+    if (staticExercises.length > 0) {
+      return staticExercises
+    }
+
+    // 2. Check in-memory generated cache
+    if (this.generatedExercisesCache[blockCode]) {
+      return this.generatedExercisesCache[blockCode]
+    }
+
+    // 3. Dynamically synthesize 10 exercises from the block's words
+    const generated = this.generateDynamicExercises(blockCode)
+    this.generatedExercisesCache[blockCode] = generated
+    return generated
+  }
+
+  private generateDynamicExercises(blockCode: string): Exercise[] {
+    const words = this.getWords(blockCode)
+    if (!words || words.length === 0) return []
+
+    const exercises: Exercise[] = []
+
+    words.forEach((targetWord, index) => {
+      // Alternate between sentence completion (even index) and synonym matching (odd index)
+      const isSentence = index % 2 === 0
+
+      // Pick 3 distractor words from the same block
+      const otherWords = words.filter(w => w.word.toLowerCase() !== targetWord.word.toLowerCase())
+      const distractors = otherWords
+        .map((w, i) => ({ w, sort: ((index + 1) * 31 + i * 17) % 100 }))
+        .sort((a, b) => a.sort - b.sort)
+        .slice(0, 3)
+        .map(item => item.w.word)
+
+      // Deterministic option shuffle
+      const rawOptions = [targetWord.word, ...distractors]
+      const options = rawOptions
+        .map((opt, i) => ({ opt, sort: ((index + 3) * 19 + i * 23) % 100 }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(item => item.opt)
+
+      if (isSentence) {
+        const sentence = targetWord.application_1 || targetWord.application_2 || `She used ${targetWord.word} in context.`
+        const escapedWord = targetWord.word.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')
+        const wordRegex = new RegExp('\\b' + escapedWord + '(?:s|ed|ing|d|es)?\\b', 'i')
+        let promptText = sentence.replace(wordRegex, '______')
+        if (!promptText.includes('______')) {
+          promptText = `${sentence} (Target word: ______)`
+        }
+
+        exercises.push({
+          block_code: blockCode,
+          word: targetWord.word,
+          type: 'sentence_completion',
+          prompt: promptText,
+          options,
+          correct_answer: targetWord.word,
+          explanation: `${targetWord.word}: ${sentence}`,
+          order_index: index + 1
+        })
+      } else {
+        const synList = (targetWord.synonyms && targetWord.synonyms.length > 0)
+          ? targetWord.synonyms.slice(0, 3).join(', ')
+          : 'related meaning'
+        const promptText = `Which target word best matches: “${synList}”?`
+
+        exercises.push({
+          block_code: blockCode,
+          word: targetWord.word,
+          type: 'synonym_matching',
+          prompt: promptText,
+          options,
+          correct_answer: targetWord.word,
+          explanation: `“${targetWord.word}” means: ${(targetWord.synonyms || []).join(', ')}. Example: "${targetWord.application_1}"`,
+          order_index: index + 1
+        })
+      }
+    })
+
+    return exercises
   }
 
   // --- PROGRESS & GATING LOGIC ---

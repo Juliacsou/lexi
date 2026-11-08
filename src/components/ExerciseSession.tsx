@@ -100,6 +100,27 @@ export const ExerciseSession: React.FC<ExerciseSessionProps> = ({
     window.speechSynthesis.speak(utterance)
   }
 
+  // Defensive guard against empty exercises or out-of-bounds index
+  if (!currentExercise || totalExercises === 0) {
+    return (
+      <div className="p-6 text-center space-y-4 max-w-md mx-auto my-auto min-h-[calc(100vh-80px)] flex flex-col justify-center">
+        <div className="clay-card p-6 space-y-4">
+          <AlertCircle size={36} className="mx-auto text-[#FF8F12]" />
+          <h3 className="text-xl font-heading font-extrabold text-white">No Exercises Available</h3>
+          <p className="text-xs text-slate-300 leading-relaxed">
+            There are no exercises available for this block right now.
+          </p>
+          <button
+            onClick={onFinish}
+            className="w-full clay-btn clay-btn-purple py-3.5 px-6 text-sm font-bold flex items-center justify-center gap-2"
+          >
+            <span>Return to Workbook Path</span>
+          </button>
+        </div>
+      </div>
+    )
+  }
+
   // ----------------------------------------------------
   // RESULTS SCREEN (Test Completed or Practice Completed)
   // ----------------------------------------------------

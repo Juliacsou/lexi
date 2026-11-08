@@ -192,9 +192,9 @@ export const FlashcardsView: React.FC<FlashcardsViewProps> = ({
       <div className="space-y-3 pt-2">
         <button
           onClick={onStartPractice}
-          className="w-full clay-btn clay-btn-dark py-4 px-4 text-sm font-bold flex items-center justify-center gap-2"
+          className="w-full clay-btn clay-btn-purple py-4 px-4 text-base font-bold flex items-center justify-center gap-2"
         >
-          <BookOpen size={18} className="text-[#FFD333]" />
+          <BookOpen size={20} className="text-[#FFD333]" />
           <span>PRACTICE</span>
         </button>
 
