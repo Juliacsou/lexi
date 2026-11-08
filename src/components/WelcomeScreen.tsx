@@ -24,7 +24,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onContinueAsGuest 
     <div className="min-h-screen flex flex-col justify-between p-6 bg-gradient-to-b from-[#1C0E42] via-[#160E33] to-[#100924] text-white">
       {/* Top Brand Tag */}
       <div className="pt-4 text-center">
-        <div className="inline-flex items-center gap-1.5 bg-[#FF8F12] text-white text-xs font-heading font-bold px-3 py-1 rounded-full uppercase tracking-wider shadow-lg">
+        <div className="inline-flex items-center gap-1.5 bg-[#FF8F12] text-white text-xs font-heading font-bold px-3.5 py-1 rounded-full uppercase tracking-wider clay-badge">
           <Sparkles size={13} />
           <span>English Vocabulary Immersion</span>
         </div>
@@ -36,7 +36,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onContinueAsGuest 
           {/* Subtle glow behind mascot */}
           <div className="absolute inset-0 bg-[#6732D8] rounded-full blur-2xl opacity-40 -z-0 scale-125" />
           <img
-            src="./assets/Logo_V2_Simplificada_Aprovada.png"
+            src="./assets/Logo_V2_Simplificada_Transparente.png"
             alt="Lexi Fox"
             className="w-48 h-48 mx-auto object-contain drop-shadow-2xl relative z-10 transition-transform active:scale-95"
           />
@@ -54,13 +54,13 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onContinueAsGuest 
           </p>
         </div>
 
-        {/* Feature Pills */}
-        <div className="grid grid-cols-2 gap-2 text-left max-w-xs mx-auto pt-2">
-          <div className="bg-[#241748] border border-[#3C2577] p-2.5 rounded-2xl flex items-center gap-2">
+        {/* Feature Pills (Clay Style, No Strokes) */}
+        <div className="grid grid-cols-2 gap-2.5 text-left max-w-xs mx-auto pt-2">
+          <div className="clay-card p-3 flex items-center gap-2.5">
             <Headphones size={18} className="text-[#FF8F12] shrink-0" />
             <span className="text-[11px] font-semibold text-slate-200">Native Audio</span>
           </div>
-          <div className="bg-[#241748] border border-[#3C2577] p-2.5 rounded-2xl flex items-center gap-2">
+          <div className="clay-card p-3 flex items-center gap-2.5">
             <Award size={18} className="text-[#FFD333] shrink-0" />
             <span className="text-[11px] font-semibold text-slate-200">Mini-Certificates</span>
           </div>
@@ -69,11 +69,11 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onContinueAsGuest 
 
       {/* Actions: Google Sign In + Continue as Guest */}
       <div className="space-y-3 pb-4">
-        {/* Google Sign In Button */}
+        {/* Google Sign In Button (Clay Style, No Strokes) */}
         <button
           onClick={handleGoogleLogin}
           disabled={isLoading}
-          className="w-full py-4 px-5 rounded-2xl bg-white hover:bg-slate-50 text-slate-800 font-heading font-bold text-base shadow-2xl flex items-center justify-center gap-3 transition-all active:scale-[0.98] border-b-5 border-slate-300"
+          className="w-full py-4 px-5 clay-btn clay-btn-white text-slate-900 font-heading font-bold text-base flex items-center justify-center gap-3 transition-all active:scale-[0.98]"
         >
           {isLoading ? (
             <Loader2 size={20} className="animate-spin text-[#6732D8]" />
@@ -100,11 +100,11 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({ onContinueAsGuest 
           <span>{isLoading ? 'Connecting to Google...' : 'Continue with Google'}</span>
         </button>
 
-        {/* Continue as Guest Button */}
+        {/* Continue as Guest Button (Clay Style, No Strokes) */}
         <button
           onClick={onContinueAsGuest}
           disabled={isLoading}
-          className="w-full py-3.5 px-4 rounded-2xl btn-3d btn-3d-dark border-[#3A2274] text-xs font-bold text-slate-300 hover:text-white flex items-center justify-center gap-2"
+          className="w-full py-3.5 px-4 clay-btn clay-btn-dark text-xs font-bold text-slate-300 hover:text-white flex items-center justify-center gap-2"
         >
           <span>Continue as Guest (Explorar sem conta)</span>
           <ArrowRight size={14} />

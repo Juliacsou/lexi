@@ -150,7 +150,7 @@ export const ExerciseSession: React.FC<ExerciseSessionProps> = ({
           </div>
 
           {/* Score Card */}
-          <div className="bg-[#1D123D] border-2 border-[#3C2577] rounded-3xl p-5 shadow-xl">
+          <div className="clay-card p-5">
             <div className="flex items-center justify-around">
               <div>
                 <span className="text-xs text-slate-400 font-medium">Final Grade</span>
@@ -160,7 +160,7 @@ export const ExerciseSession: React.FC<ExerciseSessionProps> = ({
                 </p>
               </div>
 
-              <div className="h-10 w-px bg-[#321E63]" />
+              <div className="h-10 w-px bg-white/10" />
 
               <div>
                 <span className="text-xs text-slate-400 font-medium">Accuracy</span>
@@ -172,16 +172,16 @@ export const ExerciseSession: React.FC<ExerciseSessionProps> = ({
             </div>
 
             {/* Passing bar indicator */}
-            <div className="mt-4 pt-3 border-t border-[#2C1959]">
+            <div className="mt-4 pt-3 border-t border-white/5">
               <div className="flex justify-between text-xs text-slate-300 mb-1">
                 <span>Passing Cutoff: 8.0 (80%)</span>
                 <span className={isPassed ? 'text-emerald-400 font-bold' : 'text-rose-400 font-bold'}>
                   {isPassed ? 'APPROVED' : 'BELOW CUTOFF'}
                 </span>
               </div>
-              <div className="w-full bg-[#120B26] rounded-full h-2.5 overflow-hidden">
+              <div className="w-full clay-well h-3 overflow-hidden p-0.5">
                 <div
-                  className={`h-full rounded-full ${isPassed ? 'bg-emerald-500' : 'bg-rose-500'}`}
+                  className={`h-full rounded-full transition-all duration-500 ${isPassed ? 'bg-emerald-500' : 'bg-rose-500'}`}
                   style={{ width: `${Math.min(100, (finalScore / 10) * 100)}%` }}
                 />
               </div>
@@ -190,8 +190,13 @@ export const ExerciseSession: React.FC<ExerciseSessionProps> = ({
 
           {/* MINI-CERTIFICATE (If Passed in Test mode) */}
           {isPassed && mode !== 'practice' && (
-            <div className="bg-gradient-to-br from-[#2E1866] to-[#1C0E42] border-2 border-[#FFD333]/60 rounded-3xl p-5 text-left shadow-2xl relative overflow-hidden">
-              <div className="flex items-center justify-between pb-3 border-b border-[#432A85]">
+            <div 
+              className="clay-card-elevated p-5 text-left relative overflow-hidden"
+              style={{
+                boxShadow: 'inset 2px 2px 5px rgba(255, 211, 51, 0.25), inset -3px -4px 6px rgba(0, 0, 0, 0.5), 0 16px 36px -6px rgba(255, 211, 51, 0.15)'
+              }}
+            >
+              <div className="flex items-center justify-between pb-3 border-b border-white/10">
                 <div>
                   <span className="text-[10px] font-heading font-bold uppercase tracking-wider text-[#FFD333]">
                     Official Block Mini-Certificate
@@ -208,10 +213,10 @@ export const ExerciseSession: React.FC<ExerciseSessionProps> = ({
               </div>
 
               <div className="mt-3">
-                <p className="text-xs text-slate-300 mb-2">10 Target Words Dominated:</p>
+                <p className="text-xs text-slate-300 mb-2 font-medium">10 Target Words Dominated:</p>
                 <div className="grid grid-cols-2 gap-1.5 text-xs">
                   {blockWords.map(w => (
-                    <div key={w.word} className="flex items-center gap-1.5 text-slate-200 bg-[#160A33] px-2 py-1 rounded-lg">
+                    <div key={w.word} className="flex items-center gap-1.5 text-slate-200 clay-well px-2.5 py-1.5 rounded-xl">
                       <CheckCircle size={13} className="text-emerald-400 shrink-0" />
                       <span className="font-semibold">{w.word}</span>
                     </div>
@@ -227,14 +232,17 @@ export const ExerciseSession: React.FC<ExerciseSessionProps> = ({
 
           {/* RECOVERY ROUND PROMPT (If failed) */}
           {!isPassed && mode !== 'practice' && failedWords.length > 0 && (
-            <div className="bg-[#24133A] border border-rose-500/40 rounded-2xl p-4 text-left space-y-2">
+            <div 
+              className="clay-card p-4 text-left space-y-2.5" 
+              style={{ background: 'linear-gradient(145deg, #2D1428, #1E0C1C)' }}
+            >
               <div className="flex items-center gap-2 text-rose-300 font-heading font-bold text-xs uppercase tracking-wider">
                 <AlertCircle size={15} />
                 <span>Target Words Requiring Reinforcement ({failedWords.length}):</span>
               </div>
               <div className="flex flex-wrap gap-1.5">
                 {failedWords.map(w => (
-                  <span key={w} className="bg-rose-500/20 text-rose-200 border border-rose-500/40 text-xs px-2.5 py-1 rounded-xl font-semibold">
+                  <span key={w} className="clay-badge bg-rose-500/25 text-rose-200 text-xs px-3 py-1 font-bold">
                     {w}
                   </span>
                 ))}
@@ -247,11 +255,11 @@ export const ExerciseSession: React.FC<ExerciseSessionProps> = ({
         </div>
 
         {/* Footer Actions */}
-        <div className="space-y-2 pt-4">
+        <div className="space-y-2.5 pt-4">
           {!isPassed && mode !== 'practice' && onStartRecovery && failedWords.length > 0 ? (
             <button
               onClick={() => onStartRecovery(failedWords)}
-              className="w-full btn-3d btn-3d-red py-3.5 px-4 text-base font-bold flex items-center justify-center gap-2 shadow-xl shadow-rose-500/30"
+              className="w-full clay-btn clay-btn-red py-3.5 px-4 text-base font-bold flex items-center justify-center gap-2"
             >
               <RefreshCw size={18} />
               <span>START RECOVERY ROUND NOW</span>
@@ -260,7 +268,7 @@ export const ExerciseSession: React.FC<ExerciseSessionProps> = ({
 
           <button
             onClick={onFinish}
-            className="w-full btn-3d btn-3d-purple py-3.5 px-4 text-base font-bold flex items-center justify-center gap-2 shadow-xl"
+            className="w-full clay-btn clay-btn-purple py-3.5 px-4 text-base font-bold flex items-center justify-center gap-2"
           >
             <span>Back to Workbook Path</span>
             <ArrowRight size={18} />
@@ -278,28 +286,28 @@ export const ExerciseSession: React.FC<ExerciseSessionProps> = ({
   return (
     <div className="p-4 flex flex-col justify-between min-h-[calc(100vh-65px)] max-w-md mx-auto space-y-4 pb-28">
       {/* Top Bar: Close button + Animated Progress bar + Counter */}
-      <div className="space-y-2">
+      <div className="space-y-2.5">
         <div className="flex items-center justify-between text-xs">
           <div className="flex items-center gap-2">
             <button
               onClick={onFinish}
-              className="p-1.5 -ml-1 text-slate-400 hover:text-white rounded-xl bg-[#241748]"
+              className="clay-btn clay-btn-dark p-2 -ml-1 text-slate-300 hover:text-white rounded-xl"
               aria-label="Exit exercise session"
             >
               <X size={18} />
             </button>
-            <span className="font-heading font-bold text-[#FF8F12] uppercase tracking-wider text-[11px]">
+            <span className="clay-badge bg-[#251545] text-[#FF8F12] text-[11px] font-heading font-bold px-3 py-1 uppercase tracking-wider">
               {mode === 'practice' ? 'Practice Mode' : mode === 'recovery' ? 'Recovery Round' : 'Official Test'}
             </span>
           </div>
 
-          <span className="text-slate-300 font-heading font-semibold text-xs">
+          <span className="text-slate-300 font-heading font-bold text-xs">
             {currentIndex + 1} / {totalExercises}
           </span>
         </div>
 
-        {/* Animated Progress Bar */}
-        <div className="w-full bg-[#1A0E38] rounded-full h-2.5 overflow-hidden p-0.5 border border-[#321B66]">
+        {/* Animated Progress Bar in sunken clay well */}
+        <div className="w-full clay-well h-3 overflow-hidden p-0.5">
           <div
             className="h-full rounded-full transition-all duration-300 bg-gradient-to-r from-[#FF8F12] to-[#FFD333]"
             style={{ width: `${progressPercent}%` }}
@@ -309,44 +317,44 @@ export const ExerciseSession: React.FC<ExerciseSessionProps> = ({
 
       {/* Main Question Area */}
       <div className="space-y-5 my-auto">
-        {/* Type pill */}
+        {/* Type pill + Audio read */}
         <div className="flex items-center justify-between">
-          <span className="bg-[#2D1B59] text-[#FFF0DA] text-[11px] font-heading font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+          <span className="clay-badge bg-[#2B1754] text-[#FFF0DA] text-[11px] font-heading font-bold px-3.5 py-1.5 uppercase tracking-wider">
             {currentExercise.type === 'sentence_completion' ? 'Fill in the blanks' : 'Synonym Matching'}
           </span>
 
           <button
             onClick={() => handleSpeak(currentExercise.prompt)}
-            className="text-slate-400 hover:text-[#FF8F12] p-1.5 rounded-lg bg-[#241748]"
+            className="clay-btn clay-btn-dark p-2 rounded-xl text-slate-300 hover:text-[#FF8F12]"
             title="Read question"
           >
             <Volume2 size={16} />
           </button>
         </div>
 
-        {/* Prompt */}
-        <div className="bg-[#1E133F] border-2 border-[#382370] rounded-3xl p-5 shadow-lg">
+        {/* Prompt Container */}
+        <div className="clay-card p-6">
           <h3 className="text-lg sm:text-xl font-heading font-bold text-white leading-relaxed">
             {currentExercise.prompt}
           </h3>
         </div>
 
-        {/* Options List (4 3D buttons) */}
-        <div className="space-y-2.5 pt-2">
+        {/* Options List (4 Soft Clay Buttons) */}
+        <div className="space-y-3 pt-1">
           {currentExercise.options.map((opt, oIdx) => {
             const isSelected = selectedOption === opt
             const isCorrectOption = opt.trim().toLowerCase() === currentExercise.correct_answer.trim().toLowerCase()
 
-            let buttonClass = 'btn-3d-dark border-[#3A2274]'
+            let buttonClass = 'clay-btn-dark'
 
             if (isAnswered) {
               if (isCorrectOption) {
-                buttonClass = 'btn-3d-green'
+                buttonClass = 'clay-btn-green'
               } else if (isSelected && !isCorrect) {
-                buttonClass = 'btn-3d-red'
+                buttonClass = 'clay-btn-red'
               }
             } else if (isSelected) {
-              buttonClass = 'btn-3d-fox ring-2 ring-[#FF8F12]'
+              buttonClass = 'clay-btn-orange'
             }
 
             return (
@@ -354,7 +362,7 @@ export const ExerciseSession: React.FC<ExerciseSessionProps> = ({
                 key={oIdx}
                 onClick={() => handleSelectOption(opt)}
                 disabled={isAnswered}
-                className={`w-full py-3.5 px-4 rounded-2xl btn-3d ${buttonClass} text-base font-bold text-left flex items-center justify-between`}
+                className={`w-full py-3.5 px-5 rounded-2xl clay-btn ${buttonClass} text-base font-bold text-left flex items-center justify-between`}
               >
                 <span>{opt}</span>
                 <span className="text-xs opacity-60 font-mono">
@@ -372,7 +380,7 @@ export const ExerciseSession: React.FC<ExerciseSessionProps> = ({
           <button
             onClick={handleCheckAnswer}
             disabled={!selectedOption}
-            className={`w-full btn-3d btn-3d-fox py-3.5 text-base font-bold shadow-xl ${
+            className={`w-full clay-btn clay-btn-orange py-4 text-base font-bold ${
               !selectedOption ? 'opacity-40 cursor-not-allowed' : ''
             }`}
           >
@@ -382,20 +390,25 @@ export const ExerciseSession: React.FC<ExerciseSessionProps> = ({
       )}
 
       {/* ---------------------------------------------------- */}
-      {/* DUOLINGO-STYLE INSTANT FEEDBACK BOTTOM SHEET GAVETA */}
+      {/* CLAY INSTANT FEEDBACK BOTTOM SHEET GAVETA */}
       {/* ---------------------------------------------------- */}
       {isAnswered && (
         <div
-          className={`fixed bottom-0 left-0 right-0 z-50 p-4 border-t-2 shadow-2xl animate-in slide-in-from-bottom duration-200 ${
-            isCorrect
-              ? 'bg-[#15341D] border-emerald-500/80 text-white'
-              : 'bg-[#3A1418] border-rose-500/80 text-white'
-          }`}
+          className="fixed bottom-0 left-0 right-0 z-50 p-5 rounded-t-3xl animate-in slide-in-from-bottom duration-200 text-white"
+          style={{
+            background: isCorrect 
+              ? 'linear-gradient(160deg, #184824, #0F2D17)' 
+              : 'linear-gradient(160deg, #4A171D, #2D0C10)',
+            boxShadow: isCorrect 
+              ? 'inset 0 2px 4px rgba(255, 255, 255, 0.25), inset 0 -3px 6px rgba(0, 0, 0, 0.5), 0 -12px 36px rgba(0, 0, 0, 0.7)' 
+              : 'inset 0 2px 4px rgba(255, 255, 255, 0.2), inset 0 -3px 6px rgba(0, 0, 0, 0.6), 0 -12px 36px rgba(0, 0, 0, 0.7)',
+            border: 'none'
+          }}
         >
-          <div className="max-w-md mx-auto space-y-3">
+          <div className="max-w-md mx-auto space-y-4">
             <div className="flex items-start gap-3">
               <div
-                className={`p-2 rounded-2xl ${
+                className={`p-2.5 rounded-2xl clay-badge ${
                   isCorrect ? 'bg-emerald-500 text-white' : 'bg-rose-500 text-white'
                 }`}
               >
@@ -421,8 +434,8 @@ export const ExerciseSession: React.FC<ExerciseSessionProps> = ({
 
             <button
               onClick={handleContinue}
-              className={`w-full btn-3d py-3.5 text-base font-bold shadow-xl ${
-                isCorrect ? 'btn-3d-green' : 'btn-3d-red'
+              className={`w-full clay-btn py-4 text-base font-bold ${
+                isCorrect ? 'clay-btn-green' : 'clay-btn-red'
               }`}
             >
               CONTINUE

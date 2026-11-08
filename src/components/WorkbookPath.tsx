@@ -34,8 +34,8 @@ export const WorkbookPath: React.FC<WorkbookPathProps> = ({
 
   return (
     <div className="p-4 space-y-6 pb-20">
-      {/* Workbook Header Banner */}
-      <div className="bg-[#1E143E] rounded-3xl p-5 border border-[#3B2574] shadow-lg">
+      {/* Workbook Header Banner (Clay Card, No Strokes) */}
+      <div className="clay-card p-5">
         <div className="flex items-center justify-between">
           <span className="text-xs font-heading font-bold text-[#FF8F12] uppercase tracking-wider">
             Tier {workbook.difficulty_tier} • Volume {workbook.volume_number}
@@ -49,15 +49,15 @@ export const WorkbookPath: React.FC<WorkbookPathProps> = ({
           {workbook.title}
         </h2>
 
-        {/* Progress Bar */}
+        {/* Progress Bar (Clay Well Track) */}
         <div className="mt-4">
           <div className="flex justify-between text-xs text-slate-300 mb-1.5 font-medium">
             <span>{stats.passedCount} of {blocks.length} completed</span>
             <span className="font-heading font-bold text-white">{stats.percent}%</span>
           </div>
-          <div className="w-full bg-[#120B26] rounded-full h-3 overflow-hidden p-0.5 border border-[#2B1B54]">
+          <div className="w-full clay-well h-3 overflow-hidden p-0.5">
             <div
-              className="h-full rounded-full transition-all duration-500 bg-gradient-to-r from-[#FF8F12] via-[#FFD333] to-[#22C55E]"
+              className="h-full rounded-full transition-all duration-500 bg-gradient-to-r from-[#FF8F12] via-[#FFD333] to-[#22C55E] shadow-[inset_1px_1px_2px_rgba(255,255,255,0.4)]"
               style={{ width: `${Math.min(100, stats.percent)}%` }}
             />
           </div>
@@ -67,7 +67,7 @@ export const WorkbookPath: React.FC<WorkbookPathProps> = ({
         {stats.passedCount >= 1 && (
           <button
             onClick={onOpenReviewQuiz}
-            className="w-full mt-4 btn-3d btn-3d-yellow py-2.5 px-4 rounded-xl text-xs flex items-center justify-center gap-2"
+            className="w-full mt-4 clay-btn clay-btn-yellow py-3 px-4 text-xs flex items-center justify-center gap-2"
           >
             <Sparkles size={15} />
             <span>Cumulative Review Quiz ({stats.passedCount} blocks unlocked)</span>
@@ -78,7 +78,7 @@ export const WorkbookPath: React.FC<WorkbookPathProps> = ({
       {/* Vertical Gamified Path */}
       <div className="relative flex flex-col items-center py-6">
         {/* Decorative central winding line */}
-        <div className="absolute top-8 bottom-8 w-2 bg-[#281850] rounded-full -z-0" />
+        <div className="absolute top-8 bottom-8 w-2 bg-[#25154A] rounded-full -z-0 shadow-[inset_1px_1px_2px_rgba(0,0,0,0.6)]" />
 
         <div className="space-y-7 z-10 w-full flex flex-col items-center">
           {blocks.map((block, index) => {
@@ -93,19 +93,19 @@ export const WorkbookPath: React.FC<WorkbookPathProps> = ({
                 key={block.code}
                 className={`transition-transform duration-300 ${getOffsetClass(index)} flex flex-col items-center`}
               >
-                {/* Node Button */}
+                {/* Node Button (Clay Puffy Spheres, No Borders) */}
                 <button
                   onClick={() => handleNodeClick(block, progress)}
                   disabled={isLocked}
                   aria-label={`${block.title}: ${progress.status}`}
                   className={`w-20 h-20 rounded-full flex flex-col items-center justify-center relative transition-all duration-200 select-none ${
                     isPassed
-                      ? 'btn-3d btn-3d-yellow shadow-amber-500/30'
+                      ? 'clay-btn clay-btn-yellow'
                       : isRecovery
-                      ? 'btn-3d btn-3d-red shadow-rose-500/30 animate-pulse'
+                      ? 'clay-btn clay-btn-red animate-pulse'
                       : isAvailable
-                      ? 'btn-3d btn-3d-fox shadow-orange-500/40 ring-4 ring-[#FF8F12]/30 scale-105'
-                      : 'bg-[#22163F] border-b-4 border-[#160D2D] text-slate-500 cursor-not-allowed'
+                      ? 'clay-btn clay-btn-orange scale-105 shadow-[0_0_24px_rgba(255,143,18,0.5)]'
+                      : 'clay-well text-slate-500 opacity-60 cursor-not-allowed'
                   }`}
                 >
                   {isPassed ? (
@@ -120,14 +120,14 @@ export const WorkbookPath: React.FC<WorkbookPathProps> = ({
 
                   {/* Score badge if passed */}
                   {isPassed && progress.best_score !== null && (
-                    <span className="absolute -bottom-2 bg-black/80 text-[#FFD333] text-[10px] font-heading font-bold px-2 py-0.5 rounded-full border border-[#FFD333]/50">
+                    <span className="clay-badge absolute -bottom-2 bg-black/85 text-[#FFD333] text-[10px] font-heading font-bold px-2 py-0.5">
                       ★ {progress.best_score.toFixed(1)}
                     </span>
                   )}
 
                   {/* Recovery badge */}
                   {isRecovery && (
-                    <span className="absolute -bottom-2 bg-[#EF4444] text-white text-[9px] font-heading font-bold px-2 py-0.5 rounded-full">
+                    <span className="clay-badge absolute -bottom-2 bg-[#EF4444] text-white text-[9px] font-heading font-bold px-2 py-0.5">
                       RECOVERY
                     </span>
                   )}
@@ -147,8 +147,8 @@ export const WorkbookPath: React.FC<WorkbookPathProps> = ({
 
       {/* Block Preview Drawer / Modal */}
       {selectedPreviewBlock && (
-        <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 animate-in fade-in duration-200">
-          <div className="w-full max-w-md bg-[#1B113B] border-t sm:border border-[#3B2574] rounded-t-3xl sm:rounded-3xl p-6 space-y-4 shadow-2xl max-h-[85vh] overflow-y-auto">
+        <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-end sm:items-center justify-center p-0 sm:p-4 animate-in fade-in duration-200">
+          <div className="w-full max-w-md clay-card rounded-t-3xl sm:rounded-3xl p-6 space-y-4 max-h-[85vh] overflow-y-auto">
             <div className="flex items-center justify-between">
               <div>
                 <span className="text-xs font-heading font-bold text-[#FF8F12] uppercase tracking-wider">
@@ -160,7 +160,7 @@ export const WorkbookPath: React.FC<WorkbookPathProps> = ({
               </div>
               <button
                 onClick={() => setSelectedPreviewBlock(null)}
-                className="p-2 text-slate-400 hover:text-white rounded-full bg-[#281A54]"
+                className="p-2 text-slate-300 hover:text-white rounded-full clay-btn clay-btn-dark"
               >
                 <X size={18} />
               </button>
@@ -173,7 +173,7 @@ export const WorkbookPath: React.FC<WorkbookPathProps> = ({
                 {dataService.getWords(selectedPreviewBlock.code).map(w => (
                   <span
                     key={w.word}
-                    className="bg-[#26174D] border border-[#3B2574] text-white text-xs px-2.5 py-1 rounded-xl font-medium"
+                    className="clay-badge bg-[#26174D] text-white text-xs px-3 py-1 font-semibold"
                   >
                     {w.word}
                   </span>
@@ -181,11 +181,11 @@ export const WorkbookPath: React.FC<WorkbookPathProps> = ({
               </div>
             </div>
 
-            {/* Status Info */}
+            {/* Status Info (Clay Well) */}
             {(() => {
               const p = dataService.getBlockProgress(selectedPreviewBlock.code)
               return (
-                <div className="bg-[#120B26] p-3 rounded-2xl border border-[#2B1B54] text-xs space-y-1">
+                <div className="clay-well p-4 text-xs space-y-2">
                   <div className="flex justify-between">
                     <span className="text-slate-400">Status:</span>
                     <span className="font-heading font-bold uppercase text-[#FF8F12]">
@@ -215,7 +215,7 @@ export const WorkbookPath: React.FC<WorkbookPathProps> = ({
                 setSelectedPreviewBlock(null)
                 onSelectBlock(b)
               }}
-              className="w-full btn-3d btn-3d-fox py-3 text-base font-bold shadow-lg flex items-center justify-center gap-2"
+              className="w-full clay-btn clay-btn-orange py-3.5 text-base font-bold flex items-center justify-center gap-2"
             >
               <BookOpen size={18} />
               <span>Study Flashcards</span>

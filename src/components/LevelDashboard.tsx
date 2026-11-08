@@ -19,10 +19,10 @@ export const LevelDashboard: React.FC<LevelDashboardProps> = ({
 }) => {
   return (
     <div className="p-4 space-y-5 pb-12">
-      {/* Hero Card */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-[#6732D8] via-[#5222B5] to-[#2D126B] p-5 shadow-xl border border-[#7D46ED]/40">
+      {/* Hero Card (Clay Hero, No Strokes) */}
+      <div className="clay-card-hero p-6 relative overflow-hidden">
         <div className="relative z-10">
-          <div className="inline-flex items-center gap-1.5 bg-[#FF8F12] text-white text-xs font-heading font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2.5 shadow-md">
+          <div className="inline-flex items-center gap-1.5 bg-[#FF8F12] text-white text-xs font-heading font-bold px-3 py-1 rounded-full uppercase tracking-wider mb-2.5 clay-badge">
             <Sparkles size={13} />
             <span>Active Level • C1</span>
           </div>
@@ -34,12 +34,12 @@ export const LevelDashboard: React.FC<LevelDashboardProps> = ({
             High-utility spoken and professional English. No translation, pure immersion.
           </p>
 
-          <div className="mt-4 flex items-center gap-4 text-xs text-white/90 font-medium">
-            <div className="flex items-center gap-1 bg-black/25 backdrop-blur-sm px-2.5 py-1 rounded-xl">
+          <div className="mt-4 flex items-center gap-3 text-xs text-white/90 font-medium">
+            <div className="flex items-center gap-1.5 bg-black/25 backdrop-blur-sm px-3 py-1 rounded-xl clay-badge">
               <BookOpen size={14} className="text-[#FFD333]" />
               <span>5 Workbooks</span>
             </div>
-            <div className="flex items-center gap-1 bg-black/25 backdrop-blur-sm px-2.5 py-1 rounded-xl">
+            <div className="flex items-center gap-1.5 bg-black/25 backdrop-blur-sm px-3 py-1 rounded-xl clay-badge">
               <Star size={14} className="text-[#FFD333]" />
               <span>1,000 Words</span>
             </div>
@@ -48,17 +48,17 @@ export const LevelDashboard: React.FC<LevelDashboardProps> = ({
 
         {/* Mascot badge in hero */}
         <img
-          src="./assets/Logo_V2_Simplificada_Aprovada.png"
+          src="./assets/Logo_V2_Simplificada_Transparente.png"
           alt="Lexi Fox"
-          className="absolute -right-2 -bottom-3 w-32 h-32 object-contain pointer-events-none drop-shadow-xl"
+          className="absolute -right-3 -bottom-4 w-36 h-36 object-contain pointer-events-none drop-shadow-2xl"
         />
       </div>
 
-      {/* Google Login Banner (Visible whenever user is in guest mode or not logged in) */}
+      {/* Google Login Banner (Clay Style, No Strokes) */}
       {!user && onOpenAuth && (
-        <div className="bg-gradient-to-r from-[#24134C] via-[#1C103B] to-[#160E33] border-2 border-[#6732D8] rounded-3xl p-4 shadow-xl flex items-center justify-between gap-3">
+        <div className="clay-card p-4 flex items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-2xl bg-white flex items-center justify-center shrink-0 shadow-md">
+            <div className="w-10 h-10 rounded-2xl bg-white flex items-center justify-center shrink-0 clay-badge">
               <svg className="w-5 h-5" viewBox="0 0 24 24">
                 <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
                 <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
@@ -73,7 +73,7 @@ export const LevelDashboard: React.FC<LevelDashboardProps> = ({
           </div>
           <button
             onClick={onOpenAuth}
-            className="shrink-0 bg-white hover:bg-slate-100 text-slate-900 font-heading font-bold text-xs px-3.5 py-2 rounded-xl shadow-lg border-b-3 border-slate-300 active:scale-95 transition-all flex items-center gap-1.5"
+            className="shrink-0 clay-btn clay-btn-white text-xs px-3.5 py-2 flex items-center gap-1.5"
           >
             <LogIn size={13} className="text-[#6732D8]" />
             <span>Entrar</span>
@@ -92,8 +92,8 @@ export const LevelDashboard: React.FC<LevelDashboardProps> = ({
         </p>
       </div>
 
-      {/* Workbook Cards List */}
-      <div className="space-y-3.5">
+      {/* Workbook Cards List (Clay Cards, No Strokes) */}
+      <div className="space-y-4">
         {workbooks.map((wb) => {
           const isUnlocked = dataService.isWorkbookUnlocked(wb)
           const stats = dataService.getWorkbookStats(wb.code)
@@ -103,10 +103,10 @@ export const LevelDashboard: React.FC<LevelDashboardProps> = ({
             <div
               key={wb.code}
               onClick={() => isUnlocked && onSelectWorkbook(wb)}
-              className={`rounded-2xl p-4.5 border transition-all duration-200 select-none ${
+              className={`p-5 transition-all duration-200 select-none ${
                 isUnlocked
-                  ? 'bg-[#1E143E] border-[#3B2574] hover:border-[#6732D8] hover:bg-[#25194D] cursor-pointer shadow-lg active:scale-[0.99]'
-                  : 'bg-[#160E2E]/80 border-[#231545] opacity-75 cursor-not-allowed'
+                  ? 'clay-card cursor-pointer hover:scale-[1.01] active:scale-[0.99]'
+                  : 'clay-well opacity-60 cursor-not-allowed'
               }`}
             >
               <div className="flex items-start justify-between gap-3">
@@ -116,11 +116,11 @@ export const LevelDashboard: React.FC<LevelDashboardProps> = ({
                       Tier {wb.difficulty_tier} • Vol {wb.volume_number}
                     </span>
                     {isUnlocked ? (
-                      <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-400 bg-emerald-500/15 px-2 py-0.5 rounded-md">
+                      <span className="clay-badge inline-flex items-center gap-1 text-[11px] font-semibold text-emerald-400 bg-emerald-500/20 px-2.5 py-0.5">
                         <Unlock size={11} /> Unlocked
                       </span>
                     ) : (
-                      <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-amber-400/90 bg-amber-500/15 px-2 py-0.5 rounded-md">
+                      <span className="clay-badge inline-flex items-center gap-1 text-[11px] font-semibold text-amber-400/90 bg-amber-500/20 px-2.5 py-0.5">
                         <Lock size={11} /> Locked
                       </span>
                     )}
@@ -135,7 +135,9 @@ export const LevelDashboard: React.FC<LevelDashboardProps> = ({
                   </p>
                 </div>
 
-                <div className="w-10 h-10 rounded-2xl flex items-center justify-center bg-[#281A54] border border-[#3E2880] text-white">
+                <div className={`w-11 h-11 rounded-2xl flex items-center justify-center ${
+                  isUnlocked ? 'clay-btn clay-btn-dark' : 'clay-well text-slate-500'
+                }`}>
                   {isUnlocked ? (
                     <ChevronRight size={20} className="text-[#FF8F12]" />
                   ) : (
@@ -144,8 +146,8 @@ export const LevelDashboard: React.FC<LevelDashboardProps> = ({
                 </div>
               </div>
 
-              {/* Progress Bar */}
-              <div className="mt-3.5 pt-3 border-t border-[#2A1C52]">
+              {/* Progress Bar (Clay Well Track + Puffy Fill) */}
+              <div className="mt-4 pt-3 border-t border-white/5">
                 <div className="flex items-center justify-between text-xs mb-1.5">
                   <span className="text-slate-300 font-medium">
                     {stats.passedCount} of {stats.total} blocks passed
@@ -155,9 +157,9 @@ export const LevelDashboard: React.FC<LevelDashboardProps> = ({
                   </span>
                 </div>
 
-                <div className="w-full bg-[#130A26] rounded-full h-2.5 overflow-hidden p-0.5 border border-[#2D1B59]">
+                <div className="w-full clay-well h-3 overflow-hidden p-0.5">
                   <div
-                    className="h-full rounded-full transition-all duration-500 bg-gradient-to-r from-[#FF8F12] to-[#FFD333]"
+                    className="h-full rounded-full transition-all duration-500 bg-gradient-to-r from-[#FF8F12] to-[#FFD333] shadow-[inset_1px_1px_2px_rgba(255,255,255,0.4)]"
                     style={{ width: `${Math.min(100, stats.percent)}%` }}
                   />
                 </div>

@@ -26,27 +26,27 @@ export const Header: React.FC<HeaderProps> = ({
   const avatarUrl = user?.user_metadata?.avatar_url || user?.user_metadata?.picture
 
   return (
-    <header className="sticky top-0 z-30 bg-[#160E33]/95 backdrop-blur-md border-b border-[#2B1B54] px-4 py-3 flex items-center justify-between">
+    <header className="sticky top-0 z-30 bg-[#160E33]/95 backdrop-blur-md px-4 py-3 flex items-center justify-between shadow-[0_4px_20px_rgba(0,0,0,0.35)]">
       <div className="flex items-center gap-2">
         {showBack && onBack ? (
           <button
             onClick={onBack}
-            className="p-2 -ml-1 text-slate-300 hover:text-white rounded-xl bg-[#241748] active:scale-95 transition-all"
+            className="p-2 -ml-1 text-slate-200 rounded-xl clay-btn clay-btn-dark active:scale-95 transition-all"
             aria-label="Go back"
           >
-            <ChevronLeft size={22} />
+            <ChevronLeft size={20} />
           </button>
         ) : (
           <div className="flex items-center gap-2">
             <img
               src="./assets/Logo_V2_Simplificada_Aprovada.png"
               alt="Lexi Fox"
-              className="w-10 h-10 object-contain drop-shadow"
+              className="w-10 h-10 object-contain drop-shadow-md"
             />
             <div>
               <div className="flex items-center gap-1.5">
                 <span className="font-heading font-bold text-lg text-white leading-tight">Lexi</span>
-                <span className="bg-[#6732D8] text-white text-[11px] font-heading font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                <span className="clay-badge bg-[#6732D8] text-white text-[11px] font-heading font-bold px-2.5 py-0.5 uppercase tracking-wider">
                   C1
                 </span>
               </div>
@@ -68,15 +68,15 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             onClick={onResetDemo}
             title="Reset progress to test again"
-            className="p-1.5 text-slate-400 hover:text-white rounded-xl bg-[#241748] active:scale-95 transition-all"
+            className="p-2 text-slate-400 hover:text-white rounded-xl clay-btn clay-btn-dark active:scale-95 transition-all"
           >
-            <RefreshCw size={15} />
+            <RefreshCw size={14} />
           </button>
         )}
 
         {/* Streak Badge */}
-        <div className="flex items-center gap-1 bg-[#241748] border border-[#38236E] px-2.5 py-1 rounded-full text-xs font-heading font-bold text-[#FF8F12]">
-          <Flame size={16} className="fill-[#FF8F12]" />
+        <div className="clay-badge flex items-center gap-1.5 bg-[#25154A] px-3 py-1 text-xs font-heading font-bold text-[#FF8F12]">
+          <Flame size={15} className="fill-[#FF8F12]" />
           <span>{streak}d</span>
         </div>
 
@@ -85,17 +85,17 @@ export const Header: React.FC<HeaderProps> = ({
           user ? (
             <button
               onClick={onOpenAuth}
-              className="p-1 rounded-full bg-[#241748] border-2 border-[#FF8F12] hover:scale-105 active:scale-95 transition-all overflow-hidden shadow-md"
+              className="p-0.5 rounded-full clay-badge bg-[#25154A] hover:scale-105 active:scale-95 transition-all overflow-hidden"
               title="User Profile"
             >
               {avatarUrl ? (
                 <img
                   src={avatarUrl}
                   alt="Profile"
-                  className="w-7 h-7 rounded-full object-cover"
+                  className="w-8 h-8 rounded-full object-cover"
                 />
               ) : (
-                <div className="w-7 h-7 rounded-full bg-[#6732D8] text-white flex items-center justify-center text-xs font-heading font-bold">
+                <div className="w-8 h-8 rounded-full bg-[#6732D8] text-white flex items-center justify-center text-xs font-heading font-bold">
                   {user.email ? user.email[0].toUpperCase() : 'U'}
                 </div>
               )}
@@ -103,7 +103,7 @@ export const Header: React.FC<HeaderProps> = ({
           ) : (
             <button
               onClick={onOpenAuth}
-              className="flex items-center gap-1.5 bg-white hover:bg-slate-100 text-slate-900 font-heading font-bold text-xs px-2.5 py-1.5 rounded-xl shadow-md border-b-2 border-slate-300 active:scale-95 transition-all"
+              className="clay-btn clay-btn-white flex items-center gap-1.5 text-xs px-3 py-1.5 shadow-md active:scale-95 transition-all"
               title="Sign in with Google"
             >
               <svg className="w-3.5 h-3.5 shrink-0" viewBox="0 0 24 24">

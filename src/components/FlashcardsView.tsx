@@ -99,21 +99,19 @@ export const FlashcardsView: React.FC<FlashcardsViewProps> = ({
         </div>
       </div>
 
-      {/* Main Flashcard Card (Touch/Swipe friendly) */}
-      <div className="relative bg-gradient-to-b from-[#221547] to-[#1A0F36] rounded-3xl p-6 border-2 border-[#432A85] shadow-2xl flex flex-col justify-between min-h-[400px]">
+      {/* Main Flashcard Card (Touch/Swipe friendly, Clay Card, No Strokes) */}
+      <div className="clay-card p-6 flex flex-col justify-between min-h-[420px]">
         {/* Card Header: Part of Speech + Audio Button */}
         <div className="flex items-center justify-between">
-          <span className="bg-[#382370] text-[#FFF0DA] text-xs font-heading font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+          <span className="clay-badge bg-[#321B66] text-[#FFF0DA] text-xs font-heading font-bold px-3.5 py-1 uppercase tracking-wider">
             {currentWord.part_of_speech}
           </span>
 
           <button
             onClick={() => handleSpeak(currentWord.word)}
             aria-label="Listen pronunciation"
-            className={`p-3 rounded-2xl flex items-center justify-center transition-all ${
-              isPlayingAudio
-                ? 'bg-[#FF8F12] text-white scale-110 shadow-lg shadow-orange-500/50'
-                : 'bg-[#2E1B5C] text-[#FF8F12] hover:bg-[#3D257A] active:scale-95'
+            className={`w-12 h-12 rounded-2xl flex items-center justify-center clay-btn ${
+              isPlayingAudio ? 'clay-btn-orange scale-110' : 'clay-btn-dark text-[#FF8F12]'
             }`}
           >
             <Volume2 size={22} className={isPlayingAudio ? 'animate-bounce' : ''} />
@@ -128,7 +126,7 @@ export const FlashcardsView: React.FC<FlashcardsViewProps> = ({
           <p className="text-xs text-[#FFF0DA]/70 mt-2 font-medium">Click speaker icon to hear English pronunciation</p>
         </div>
 
-        {/* Synonyms Chips */}
+        {/* Synonyms Chips (Clay Badges) */}
         <div className="space-y-1.5 my-2">
           <span className="text-[11px] font-heading font-bold uppercase tracking-wider text-slate-400">
             Direct Synonyms:
@@ -137,7 +135,7 @@ export const FlashcardsView: React.FC<FlashcardsViewProps> = ({
             {currentWord.synonyms.map((syn, sIdx) => (
               <span
                 key={sIdx}
-                className="bg-[#301E62] border border-[#4C2E9E] text-white text-xs px-2.5 py-1 rounded-xl font-medium"
+                className="clay-badge bg-[#2B1656] text-white text-xs px-3 py-1 font-semibold"
               >
                 {syn}
               </span>
@@ -145,19 +143,19 @@ export const FlashcardsView: React.FC<FlashcardsViewProps> = ({
           </div>
         </div>
 
-        {/* Application Sentences */}
-        <div className="space-y-2 mt-3 pt-3 border-t border-[#311F5E]">
+        {/* Application Sentences (Clay Wells) */}
+        <div className="space-y-2 mt-3 pt-3 border-t border-white/5">
           <span className="text-[11px] font-heading font-bold uppercase tracking-wider text-slate-400">
             Natural Contexts:
           </span>
 
-          <div className="space-y-2 text-xs leading-relaxed">
-            <div className="bg-[#150C2B]/80 p-2.5 rounded-xl border border-[#2D1B59] text-slate-200">
+          <div className="space-y-2.5 text-xs leading-relaxed">
+            <div className="clay-well p-3 text-slate-200">
               <span className="text-[#FF8F12] font-bold mr-1.5">1.</span>
               {highlightWordInSentence(currentWord.application_1, currentWord.word)}
             </div>
 
-            <div className="bg-[#150C2B]/80 p-2.5 rounded-xl border border-[#2D1B59] text-slate-200">
+            <div className="clay-well p-3 text-slate-200">
               <span className="text-[#FF8F12] font-bold mr-1.5">2.</span>
               {highlightWordInSentence(currentWord.application_2, currentWord.word)}
             </div>
@@ -165,12 +163,12 @@ export const FlashcardsView: React.FC<FlashcardsViewProps> = ({
         </div>
       </div>
 
-      {/* Navigation Arrows (Prev / Next) */}
-      <div className="flex items-center justify-between gap-3 px-2">
+      {/* Navigation Arrows (Prev / Next, Clay Buttons) */}
+      <div className="flex items-center justify-between gap-3 px-1">
         <button
           onClick={handlePrev}
           disabled={currentIndex === 0}
-          className={`flex-1 py-2.5 px-3 rounded-2xl btn-3d btn-3d-dark text-xs flex items-center justify-center gap-1.5 ${
+          className={`flex-1 py-3 px-3 rounded-2xl clay-btn clay-btn-dark text-xs flex items-center justify-center gap-1.5 ${
             currentIndex === 0 ? 'opacity-40 cursor-not-allowed' : ''
           }`}
         >
@@ -181,7 +179,7 @@ export const FlashcardsView: React.FC<FlashcardsViewProps> = ({
         <button
           onClick={handleNext}
           disabled={currentIndex === words.length - 1}
-          className={`flex-1 py-2.5 px-3 rounded-2xl btn-3d btn-3d-dark text-xs flex items-center justify-center gap-1.5 ${
+          className={`flex-1 py-3 px-3 rounded-2xl clay-btn clay-btn-dark text-xs flex items-center justify-center gap-1.5 ${
             currentIndex === words.length - 1 ? 'opacity-40 cursor-not-allowed' : ''
           }`}
         >
@@ -190,11 +188,11 @@ export const FlashcardsView: React.FC<FlashcardsViewProps> = ({
         </button>
       </div>
 
-      {/* Primary Action Buttons (PRACTICE vs TAKE THE TEST) */}
-      <div className="space-y-2.5 pt-2">
+      {/* Primary Action Buttons (PRACTICE vs TAKE THE TEST, Clay Buttons) */}
+      <div className="space-y-3 pt-2">
         <button
           onClick={onStartPractice}
-          className="w-full btn-3d btn-3d-dark py-3.5 px-4 text-sm font-bold flex items-center justify-center gap-2 border border-[#48288C]"
+          className="w-full clay-btn clay-btn-dark py-4 px-4 text-sm font-bold flex items-center justify-center gap-2"
         >
           <BookOpen size={18} className="text-[#FFD333]" />
           <span>PRACTICE (Free Training — No Grade)</span>
@@ -202,7 +200,7 @@ export const FlashcardsView: React.FC<FlashcardsViewProps> = ({
 
         <button
           onClick={onStartTest}
-          className="w-full btn-3d btn-3d-fox py-3.5 px-4 text-base font-bold flex items-center justify-center gap-2 shadow-xl shadow-orange-500/25"
+          className="w-full clay-btn clay-btn-orange py-4 px-4 text-base font-bold flex items-center justify-center gap-2"
         >
           <Award size={20} className="text-[#FFD333]" />
           <span>TAKE THE TEST (Official Evaluation)</span>

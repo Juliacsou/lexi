@@ -136,7 +136,7 @@ export default function App() {
   if (!user && !isGuest) {
     return (
       <div className="min-h-screen bg-[#100924] flex flex-col items-center">
-        <div className="w-full max-w-md min-h-screen bg-[#160E33] border-x border-[#281850] flex flex-col relative shadow-2xl">
+        <div className="w-full max-w-md min-h-screen bg-[#150D30] flex flex-col relative shadow-[0_0_60px_rgba(0,0,0,0.6)]">
           <WelcomeScreen onContinueAsGuest={() => setIsGuest(true)} />
         </div>
       </div>
@@ -166,7 +166,7 @@ export default function App() {
   return (
     <div className="min-h-screen bg-[#100924] flex flex-col items-center">
       {/* Mobile-first centered container with max-width */}
-      <div className="w-full max-w-md min-h-screen bg-[#160E33] border-x border-[#281850] flex flex-col relative shadow-2xl">
+      <div className="w-full max-w-md min-h-screen bg-[#150D30] flex flex-col relative shadow-[0_0_60px_rgba(0,0,0,0.6)]">
         {/* Navigation Header */}
         <Header
           title={headerTitle}

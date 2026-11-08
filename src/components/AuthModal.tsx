@@ -37,11 +37,11 @@ export const AuthModal: React.FC<AuthModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 bg-black/75 backdrop-blur-sm flex items-center justify-center p-4 animate-in fade-in duration-200">
-      <div className="w-full max-w-sm bg-[#1B113B] border-2 border-[#3D2577] rounded-3xl p-6 shadow-2xl relative space-y-5">
+      <div className="w-full max-w-sm clay-card p-6 relative space-y-5">
         {/* Close Button */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 p-2 text-slate-400 hover:text-white rounded-full bg-[#281A54] transition-all"
+          className="absolute top-4 right-4 p-2 text-slate-300 hover:text-white rounded-full clay-badge bg-[#281A54] transition-all"
         >
           <X size={18} />
         </button>
@@ -54,14 +54,14 @@ export const AuthModal: React.FC<AuthModalProps> = ({
                 <img
                   src={avatarUrl}
                   alt={fullName || 'User'}
-                  className="w-20 h-20 rounded-full mx-auto border-3 border-[#FF8F12] shadow-xl object-cover"
+                  className="w-20 h-20 rounded-full mx-auto clay-badge object-cover"
                 />
               ) : (
-                <div className="w-20 h-20 rounded-full mx-auto bg-gradient-to-tr from-[#6732D8] to-[#FF8F12] flex items-center justify-center text-2xl font-heading font-bold text-white shadow-xl">
+                <div className="w-20 h-20 rounded-full mx-auto clay-badge bg-gradient-to-tr from-[#6732D8] to-[#FF8F12] flex items-center justify-center text-2xl font-heading font-bold text-white">
                   {fullName ? fullName[0].toUpperCase() : 'U'}
                 </div>
               )}
-              <div className="absolute -bottom-1 -right-1 bg-emerald-500 text-white p-1 rounded-full border-2 border-[#1B113B]">
+              <div className="absolute -bottom-1 -right-1 bg-emerald-500 text-white p-1 rounded-full clay-badge">
                 <CheckCircle size={14} />
               </div>
             </div>
@@ -73,7 +73,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               <p className="text-xs text-slate-400 mt-0.5">{user.email}</p>
             </div>
 
-            <div className="bg-[#120B26] p-3 rounded-2xl border border-[#2B1B54] grid grid-cols-2 gap-2 text-center text-xs">
+            <div className="clay-well p-3.5 rounded-2xl grid grid-cols-2 gap-2 text-center text-xs">
               <div>
                 <span className="text-slate-400">Current Level</span>
                 <p className="font-heading font-bold text-white text-sm mt-0.5">C1 Advanced</p>
@@ -84,14 +84,14 @@ export const AuthModal: React.FC<AuthModalProps> = ({
               </div>
             </div>
 
-            <div className="flex items-center gap-1.5 justify-center text-[11px] text-emerald-400 bg-emerald-500/10 py-1.5 px-3 rounded-xl">
+            <div className="flex items-center gap-1.5 justify-center text-[11px] text-emerald-400 clay-badge bg-emerald-500/15 py-1.5 px-3">
               <Shield size={13} />
               <span>Progress safely synced to Supabase Cloud</span>
             </div>
 
             <button
               onClick={handleLogout}
-              className="w-full py-3 rounded-2xl btn-3d btn-3d-dark border-[#3A2274] text-xs font-bold text-rose-300 hover:text-white flex items-center justify-center gap-2"
+              className="w-full py-3.5 rounded-2xl clay-btn clay-btn-dark text-xs font-bold text-rose-300 hover:text-white flex items-center justify-center gap-2"
             >
               <LogOut size={16} />
               <span>Sign Out</span>
@@ -100,7 +100,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
         ) : (
           /* GUEST / SIGN IN WITH GOOGLE */
           <div className="space-y-5 pt-2 text-center">
-            <div className="w-16 h-16 rounded-3xl bg-gradient-to-tr from-[#6732D8] to-[#FF8F12] mx-auto flex items-center justify-center shadow-xl">
+            <div className="w-16 h-16 rounded-3xl clay-badge bg-gradient-to-tr from-[#6732D8] to-[#FF8F12] mx-auto flex items-center justify-center">
               <img
                 src="./assets/Logo_V2_Simplificada_Aprovada.png"
                 alt="Lexi Mascot"
@@ -109,7 +109,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             </div>
 
             <div>
-              <div className="inline-flex items-center gap-1 bg-[#FFD333]/15 text-[#FFD333] text-[11px] font-heading font-bold px-2.5 py-0.5 rounded-full mb-1">
+              <div className="inline-flex items-center gap-1 clay-badge bg-[#FFD333]/15 text-[#FFD333] text-[11px] font-heading font-bold px-3 py-1 mb-1">
                 <Sparkles size={12} />
                 <span>Cloud Sync</span>
               </div>
@@ -124,7 +124,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({
             {/* Google Sign In Button */}
             <button
               onClick={handleGoogleLogin}
-              className="w-full py-3.5 px-4 rounded-2xl bg-white hover:bg-slate-50 text-slate-800 font-heading font-bold text-sm shadow-xl flex items-center justify-center gap-3 transition-all active:scale-[0.98] border-b-4 border-slate-300"
+              className="w-full py-3.5 px-4 rounded-2xl clay-btn clay-btn-white text-sm font-bold flex items-center justify-center gap-3"
             >
               {/* Google Official G SVG */}
               <svg className="w-5 h-5" viewBox="0 0 24 24">
