@@ -29,6 +29,11 @@ export default function App() {
 
   // Track Supabase auth state & handle OAuth redirect
   useEffect(() => {
+    // If URL has ?welcome or ?login or ?logout, reset guest state
+    if (window.location.search.includes('welcome') || window.location.search.includes('logout')) {
+      setIsGuest(false)
+    }
+
     authService.getUser().then(u => {
       setUser(u)
       setIsAuthChecking(false)
@@ -37,9 +42,7 @@ export default function App() {
     const unsubscribe = authService.onAuthStateChange(u => {
       setUser(u)
       setIsAuthChecking(false)
-      if (u) {
-        setIsGuest(false)
-      }
+      setIsGuest(false)
     })
 
     return () => unsubscribe()
@@ -176,6 +179,8 @@ export default function App() {
             <LevelDashboard
               workbooks={workbooks}
               onSelectWorkbook={handleSelectWorkbook}
+              user={user}
+              onOpenAuth={() => setIsAuthModalOpen(true)}
             />
           )}
 
