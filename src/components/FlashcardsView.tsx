@@ -75,7 +75,7 @@ export const FlashcardsView: React.FC<FlashcardsViewProps> = ({
       <div className="space-y-2">
         <div className="flex items-center justify-between text-xs text-slate-300">
           <span className="font-heading font-bold text-[#FF8F12] uppercase tracking-wider">
-            {block.code}
+            {block.title}
           </span>
           <span className="bg-[#26174D] px-2.5 py-0.5 rounded-full font-heading font-semibold text-white">
             Card {currentIndex + 1} of {words.length}
@@ -195,7 +195,7 @@ export const FlashcardsView: React.FC<FlashcardsViewProps> = ({
           className="w-full clay-btn clay-btn-dark py-4 px-4 text-sm font-bold flex items-center justify-center gap-2"
         >
           <BookOpen size={18} className="text-[#FFD333]" />
-          <span>PRACTICE (Free Training — No Grade)</span>
+          <span>PRACTICE</span>
         </button>
 
         <button
@@ -203,7 +203,7 @@ export const FlashcardsView: React.FC<FlashcardsViewProps> = ({
           className="w-full clay-btn clay-btn-orange py-4 px-4 text-base font-bold flex items-center justify-center gap-2"
         >
           <Award size={20} className="text-[#FFD333]" />
-          <span>TAKE THE TEST (Official Evaluation)</span>
+          <span>TAKE THE TEST</span>
         </button>
       </div>
     </div>

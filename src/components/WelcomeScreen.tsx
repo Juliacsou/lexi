@@ -133,7 +133,7 @@ export const WelcomeScreen: React.FC<WelcomeScreenProps> = ({
           disabled={isLoading}
           className="w-full py-3.5 px-4 clay-btn clay-btn-dark text-xs font-bold text-slate-300 hover:text-white flex items-center justify-center gap-2"
         >
-          <span>Continue as Guest (Explorar sem conta)</span>
+          <span>Continue as Guest</span>
           <ArrowRight size={14} />
         </button>
 

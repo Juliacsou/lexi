@@ -194,9 +194,9 @@ export default function App() {
     currentScreen === 'workbook'
       ? 'Level C1'
       : currentScreen === 'flashcards'
-      ? `${selectedBlock?.code} • 10 Words`
+      ? '10 Words'
       : currentScreen === 'exercise'
-      ? selectedBlock?.code
+      ? (selectedBlock?.title || 'Vocabulary')
       : undefined
 
   return (

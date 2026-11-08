@@ -70,7 +70,7 @@ export const WorkbookPath: React.FC<WorkbookPathProps> = ({
             className="w-full mt-4 clay-btn clay-btn-yellow py-3 px-4 text-xs flex items-center justify-center gap-2"
           >
             <Sparkles size={15} />
-            <span>Cumulative Review Quiz ({stats.passedCount} blocks unlocked)</span>
+            <span>Cumulative Review Quiz</span>
           </button>
         )}
       </div>
@@ -151,9 +151,6 @@ export const WorkbookPath: React.FC<WorkbookPathProps> = ({
           <div className="w-full max-w-md clay-card rounded-t-3xl sm:rounded-3xl p-6 space-y-4 max-h-[85vh] overflow-y-auto">
             <div className="flex items-center justify-between">
               <div>
-                <span className="text-xs font-heading font-bold text-[#FF8F12] uppercase tracking-wider">
-                  {selectedPreviewBlock.code}
-                </span>
                 <h3 className="text-xl font-heading font-extrabold text-white">
                   {selectedPreviewBlock.title}
                 </h3>

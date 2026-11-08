@@ -202,7 +202,7 @@ export const ExerciseSession: React.FC<ExerciseSessionProps> = ({
                     Official Block Mini-Certificate
                   </span>
                   <h3 className="text-base font-heading font-extrabold text-white">
-                    {block.code} • Certified
+                    {block.title} • Certified
                   </h3>
                 </div>
                 <img
