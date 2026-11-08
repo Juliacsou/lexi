@@ -518,5 +518,42 @@ body.light ::-webkit-scrollbar-thumb:hover {
   box-shadow: inset 1px 1px 2px rgba(120, 110, 150, 0.35) !important;
 }
 
+/* Hero Horizontal Stats Box (High-contrast in both dark and light modes) */
+.hero-stats-box {
+  background: rgba(16, 5, 42, 0.48) !important;
+  border-radius: 1.25rem;
+  border: none !important;
+  box-shadow: 
+    inset 2px 2px 4px rgba(0, 0, 0, 0.6),
+    inset -1px -1px 2px rgba(255, 255, 255, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.2) !important;
+  backdrop-filter: blur(8px);
+}
+
+.hero-stats-box .hero-stat-num {
+  color: #FFFFFF !important;
+}
+
+.hero-stats-box .hero-stat-label {
+  color: #FFD333 !important;
+}
+
+.light .hero-stats-box {
+  background: rgba(16, 5, 42, 0.48) !important;
+  box-shadow: 
+    inset 2px 2px 4px rgba(0, 0, 0, 0.6),
+    inset -1px -1px 2px rgba(255, 255, 255, 0.15),
+    0 4px 12px rgba(0, 0, 0, 0.2) !important;
+}
+
+.light .hero-stats-box .hero-stat-num {
+  color: #FFFFFF !important;
+}
+
+.light .hero-stats-box .hero-stat-label {
+  color: #FFD333 !important;
+}
+
+
 
 

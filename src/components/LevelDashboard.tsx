@@ -29,13 +29,13 @@ export const LevelDashboard: React.FC<LevelDashboardProps> = ({
           </h2>
 
           {/* Horizontal Stats Box (C1 Level & Days Streak) */}
-          <div className="inline-flex items-center clay-well p-3 rounded-2xl bg-black/25 backdrop-blur-sm shadow-[inset_2px_2px_4px_rgba(0,0,0,0.5)]">
+          <div className="inline-flex items-center hero-stats-box px-5 py-3 rounded-2xl">
             {/* C1 / Level */}
             <div className="text-center px-4">
-              <p className="text-3xl sm:text-4xl font-heading font-extrabold text-white leading-none">
+              <p className="hero-stat-num text-3xl sm:text-4xl font-heading font-extrabold leading-none drop-shadow">
                 C1
               </p>
-              <span className="text-[11px] font-heading font-bold uppercase tracking-wider text-[#FFD333] mt-1.5 block">
+              <span className="hero-stat-label text-[11px] font-heading font-bold uppercase tracking-wider mt-1.5 block">
                 Level
               </span>
             </div>
@@ -45,12 +45,12 @@ export const LevelDashboard: React.FC<LevelDashboardProps> = ({
             {/* Streak Number / Days */}
             <div className="text-center px-4">
               <div className="flex items-center justify-center gap-1.5 leading-none">
-                <Flame size={22} className="fill-[#FF8F12] text-[#FF8F12]" />
-                <span className="text-3xl sm:text-4xl font-heading font-extrabold text-white">
+                <Flame size={22} className="fill-[#FF8F12] text-[#FF8F12] drop-shadow" />
+                <span className="hero-stat-num text-3xl sm:text-4xl font-heading font-extrabold drop-shadow">
                   {streak}
                 </span>
               </div>
-              <span className="text-[11px] font-heading font-bold uppercase tracking-wider text-[#FFD333] mt-1.5 block">
+              <span className="hero-stat-label text-[11px] font-heading font-bold uppercase tracking-wider mt-1.5 block">
                 Days
               </span>
             </div>
