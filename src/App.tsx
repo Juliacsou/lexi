@@ -21,7 +21,7 @@ export default function App() {
   const [activeExercises, setActiveExercises] = useState<Exercise[]>([])
   const [streak, setStreak] = useState<number>(3)
   const [user, setUser] = useState<User | null>(null)
-  const [isGuest, setIsGuest] = useState<boolean>(true)
+  const [isGuest, setIsGuest] = useState<boolean>(false)
   const [isAuthModalOpen, setIsAuthModalOpen] = useState<boolean>(false)
   const [isAuthChecking, setIsAuthChecking] = useState<boolean>(true)
   const [theme, setTheme] = useState<'light' | 'dark'>(() => {
@@ -55,7 +55,6 @@ export default function App() {
   useEffect(() => {
     // If URL has ?welcome or ?login or ?logout, reset guest state
     if (window.location.search.includes('welcome') || window.location.search.includes('logout')) {
-      localStorage.removeItem('lexi_guest')
       setIsGuest(false)
     }
 
@@ -70,8 +69,8 @@ export default function App() {
     const unsubscribe = authService.onAuthStateChange(u => {
       setUser(u)
       setIsAuthChecking(false)
+      setIsGuest(false)
       if (u) {
-        setIsGuest(false)
         dataService.syncUserProgressFromCloud(u.id)
       }
     })
@@ -171,10 +170,7 @@ export default function App() {
             : 'bg-[#150D30] shadow-[0_0_60px_rgba(0,0,0,0.6)]'
         }`}>
           <WelcomeScreen 
-            onContinueAsGuest={() => {
-              localStorage.setItem('lexi_guest', 'true')
-              setIsGuest(true)
-            }}
+            onContinueAsGuest={() => setIsGuest(true)}
             theme={theme}
             onToggleTheme={handleToggleTheme}
           />
