@@ -6,12 +6,13 @@ import { FlashcardsView } from './components/FlashcardsView'
 import { ExerciseSession } from './components/ExerciseSession'
 import { AuthModal } from './components/AuthModal'
 import { WelcomeScreen } from './components/WelcomeScreen'
+import { LevelsView } from './components/LevelsView'
 import { dataService } from './services/dataService'
 import { authService } from './services/authService'
 import type { Workbook, Block, Exercise } from './types'
 import type { User } from '@supabase/supabase-js'
 
-type Screen = 'dashboard' | 'workbook' | 'flashcards' | 'exercise'
+type Screen = 'dashboard' | 'levels' | 'workbook' | 'flashcards' | 'exercise'
 
 export default function App() {
   const [currentScreen, setCurrentScreen] = useState<Screen>('dashboard')
@@ -130,6 +131,8 @@ export default function App() {
       setCurrentScreen('workbook')
     } else if (currentScreen === 'workbook') {
       setCurrentScreen('dashboard')
+    } else if (currentScreen === 'levels') {
+      setCurrentScreen('dashboard')
     }
   }
 
@@ -182,7 +185,9 @@ export default function App() {
   // Determine header back button visibility and title
   const showBack = currentScreen !== 'dashboard'
   const headerTitle = 
-    currentScreen === 'workbook'
+    currentScreen === 'levels'
+      ? 'Mapa de Níveis'
+      : currentScreen === 'workbook'
       ? selectedWorkbook?.title || 'Workbook'
       : currentScreen === 'flashcards'
       ? selectedBlock?.title || 'Flashcards'
@@ -191,7 +196,9 @@ export default function App() {
       : undefined
 
   const headerSubtitle =
-    currentScreen === 'workbook'
+    currentScreen === 'levels'
+      ? 'Quadro Europeu (CEFR)'
+      : currentScreen === 'workbook'
       ? 'Level C1'
       : currentScreen === 'flashcards'
       ? '10 Words'
@@ -232,6 +239,19 @@ export default function App() {
               user={user}
               onOpenAuth={() => setIsAuthModalOpen(true)}
               streak={streak}
+              onOpenLevels={() => setCurrentScreen('levels')}
+            />
+          )}
+
+          {currentScreen === 'levels' && (
+            <LevelsView
+              onBack={() => setCurrentScreen('dashboard')}
+              onSelectLevel={(levelCode) => {
+                if (levelCode === 'C1') {
+                  setCurrentScreen('dashboard')
+                }
+              }}
+              currentLevel="C1"
             />
           )}
 

@@ -1,5 +1,4 @@
-import React from 'react'
-import { Lock, Unlock, ChevronRight, LogIn, Flame } from 'lucide-react'
+import { Lock, Unlock, ChevronRight, LogIn, Flame, Layers } from 'lucide-react'
 import type { Workbook } from '../types'
 import type { User } from '@supabase/supabase-js'
 import { dataService } from '../services/dataService'
@@ -10,6 +9,7 @@ interface LevelDashboardProps {
   user?: User | null
   onOpenAuth?: () => void
   streak?: number
+  onOpenLevels?: () => void
 }
 
 export const LevelDashboard: React.FC<LevelDashboardProps> = ({
@@ -17,43 +17,66 @@ export const LevelDashboard: React.FC<LevelDashboardProps> = ({
   onSelectWorkbook,
   user,
   onOpenAuth,
-  streak = 3
+  streak = 3,
+  onOpenLevels
 }) => {
   return (
     <div className="p-4 space-y-5 pb-12">
       {/* Hero Card (Clay Hero, No Strokes) */}
       <div className="clay-card-hero p-6 relative overflow-hidden">
-        <div className="relative z-10 space-y-4">
+        <div className="relative z-10 space-y-3.5">
           <h2 className="text-2xl sm:text-3xl font-heading font-extrabold text-white leading-tight">
             Advanced Vocabulary
           </h2>
 
           {/* Horizontal Stats Box (C1 Level & Days Streak) */}
-          <div className="inline-flex items-center hero-stats-box px-5 py-3 rounded-2xl">
-            {/* C1 / Level */}
-            <div className="text-center px-4">
-              <p className="hero-stat-num text-3xl sm:text-4xl font-heading font-extrabold leading-none drop-shadow">
-                C1
-              </p>
-              <span className="hero-stat-label text-[11px] font-heading font-bold uppercase tracking-wider mt-1.5 block">
-                Level
-              </span>
-            </div>
+          <div className="flex flex-wrap items-center gap-3">
+            <div className="inline-flex items-center hero-stats-box px-4 py-2.5 rounded-2xl">
+              {/* C1 / Level Button */}
+              <button
+                onClick={onOpenLevels}
+                className="text-center px-3 hover:scale-105 active:scale-95 transition-all flex flex-col items-center group cursor-pointer"
+                title="Ver todos os níveis (CEFR)"
+                aria-label="Ver todos os níveis"
+              >
+                <div className="flex items-center gap-1 leading-none">
+                  <span className="hero-stat-num text-3xl sm:text-4xl font-heading font-extrabold drop-shadow">
+                    C1
+                  </span>
+                  <ChevronRight size={16} className="text-[#FF8F12] group-hover:translate-x-0.5 transition-transform" />
+                </div>
+                <span className="hero-stat-label text-[11px] font-heading font-bold uppercase tracking-wider mt-1.5 block">
+                  Level
+                </span>
+              </button>
 
-            <div className="w-px h-10 bg-white/20" />
+              <div className="w-px h-9 bg-white/20 mx-1" />
 
-            {/* Streak Number / Days */}
-            <div className="text-center px-4">
-              <div className="flex items-center justify-center gap-1.5 leading-none">
-                <Flame size={22} className="fill-[#FF8F12] text-[#FF8F12] drop-shadow" />
-                <span className="hero-stat-num text-3xl sm:text-4xl font-heading font-extrabold drop-shadow">
-                  {streak}
+              {/* Streak Number / Days */}
+              <div className="text-center px-3">
+                <div className="flex items-center justify-center gap-1.5 leading-none">
+                  <Flame size={20} className="fill-[#FF8F12] text-[#FF8F12] drop-shadow" />
+                  <span className="hero-stat-num text-3xl sm:text-4xl font-heading font-extrabold drop-shadow">
+                    {streak}
+                  </span>
+                </div>
+                <span className="hero-stat-label text-[11px] font-heading font-bold uppercase tracking-wider mt-1.5 block">
+                  Days
                 </span>
               </div>
-              <span className="hero-stat-label text-[11px] font-heading font-bold uppercase tracking-wider mt-1.5 block">
-                Days
-              </span>
             </div>
+
+            {/* Quick button to view all levels */}
+            {onOpenLevels && (
+              <button
+                onClick={onOpenLevels}
+                className="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-2xl clay-btn clay-btn-dark text-xs font-heading font-bold text-[#FFF0DA] hover:text-white transition-all active:scale-95 shadow-sm"
+              >
+                <Layers size={14} className="text-[#FF8F12]" />
+                <span>Ver todos os níveis</span>
+                <ChevronRight size={14} />
+              </button>
+            )}
           </div>
         </div>
 

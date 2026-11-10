@@ -282,6 +282,19 @@ class DataService {
     return { passedCount, total, percent }
   }
 
+  // Calculate overall level passed blocks count and percentage (e.g. 'C1')
+  getLevelStats(levelCode: string) {
+    const workbooks = this.getWorkbooks().filter(w => w.level_code === levelCode)
+    const allBlocks = workbooks.flatMap(w => this.getBlocks(w.code))
+    const total = allBlocks.length || 100
+    const passedCount = allBlocks.filter(b => {
+      const p = this.getBlockProgress(b.code)
+      return p.status === 'passed'
+    }).length
+    const percent = total > 0 ? Math.round((passedCount / total) * 100) : 0
+    return { passedCount, total, percent }
+  }
+
   // Record an individual exercise attempt
   recordAttempt(attempt: Omit<ExerciseAttempt, 'timestamp'>) {
     const fullAttempt: ExerciseAttempt = {
